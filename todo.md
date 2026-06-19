@@ -1,0 +1,1 @@
+-checken ob die herz zahl erreiht wird und mit in die ergebnisse schreiben
