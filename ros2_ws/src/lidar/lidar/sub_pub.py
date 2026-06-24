@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
-from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
+from base_package.common_properties import CommonProperties
 
 
 
@@ -15,19 +15,13 @@ class SubPubPublisher(Node):
         sub_topic_val = self.get_parameter('sub_topic').get_parameter_value().string_value
         pub_topic_val = self.get_parameter('pub_topic').get_parameter_value().string_value
 
-        custom_qos = QoSProfile(
-            depth=10,  
-            reliability=ReliabilityPolicy.BEST_EFFORT, 
-            durability=DurabilityPolicy.VOLATILE        
-        )
-
-        self.publisher = self.create_publisher(LaserScan, pub_topic_val, custom_qos)
+        self.publisher = self.create_publisher(LaserScan, pub_topic_val, CommonProperties.custom_qos)
 
         self.subscription = self.create_subscription(
             LaserScan,
             sub_topic_val,
             self.listener_callback,
-            custom_qos)
+            CommonProperties.custom_qos)
 
     def listener_callback(self, msg):
         self.publisher.publish(msg)

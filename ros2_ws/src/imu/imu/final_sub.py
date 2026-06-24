@@ -3,6 +3,7 @@ import os
 
 from rclpy.node import Node
 from imu.base_properties import BaseProperties
+from base_package.common_properties import CommonProperties
 from rclpy.time import Time
 
 RMW_IMPLEMENTATION = os.environ.get('RMW_IMPLEMENTATION', 'error')
@@ -17,7 +18,7 @@ class FinalSub(Node):
             BaseProperties.msg_type,
             'imu_data_final',
             self.listener_callback,
-            BaseProperties.custom_qos)
+            CommonProperties.custom_qos)
         
         self.count = 0
         self.messurement = []
@@ -28,7 +29,7 @@ class FinalSub(Node):
     
         diff = now - msg_time
 
-        if self.count <= 200:
+        if self.count <= CommonProperties.measurement_count:
             self.messurement.append(diff)
             self.get_logger().info('Diff in Seconds: %f' % (diff.nanoseconds / 1e9))
 

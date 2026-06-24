@@ -1,7 +1,8 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.actions import Shutdown, DeclareLaunchArgument, OpaqueFunction
+from launch.actions import Shutdown, OpaqueFunction
 from launch.substitutions import LaunchConfiguration
+from base_package.common_properties import CommonProperties
 
 def evaluate_launch(context):
     topic_name = context.perform_substitution(LaunchConfiguration('topic_name'))
@@ -15,9 +16,9 @@ def evaluate_launch(context):
         )
     ]
 
-    for i in range(10):
+    for i in range(CommonProperties.node_count):
         sub_topic = topic_name if i == 0 else f'{topic_name}_{i}'
-        pub_topic = f'{topic_name}_{i+1}' if i < 4 else f'{topic_name}_final'
+        pub_topic = f'{topic_name}_{i+1}' if i < (CommonProperties.node_count -1) else f'{topic_name}_final'
         
         nodes.append(
             Node(

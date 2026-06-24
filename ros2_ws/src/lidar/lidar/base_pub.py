@@ -1,27 +1,25 @@
 import rclpy
 from rclpy.node import Node
 
+from base_package.common_properties import CommonProperties
 from sensor_msgs.msg import LaserScan
-from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
 
 import math
+import copy
 
 
 class BasePublisher(Node):
 
     def __init__(self):
         super().__init__('base_publisher')
-        custom_qos = QoSProfile(
-            depth=10,  
-            reliability=ReliabilityPolicy.BEST_EFFORT, 
-            durability=DurabilityPolicy.VOLATILE        
-        )
 
-        self.publisher_ = self.create_publisher(LaserScan, '/scan', custom_qos)
+        self.publisher_ = self.create_publisher(LaserScan, '/scan', CommonProperties.custom_qos)
         timer_period = 1 / 30
+        self.laser_scan = self.get_laser_scan()
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
-    def timer_callback(self):
+
+    def get_laser_scan(self):
         msg = LaserScan()
         msg.header.frame_id = 'laser_frame'
         
@@ -41,9 +39,11 @@ class BasePublisher(Node):
         
         msg.intensities = [1.0] * num_readings
 
-        msg.header.stamp = self.get_clock().now().to_msg()
+        return msg
 
-        # Nachricht senden
+    def timer_callback(self):
+        msg = copy.deepcopy(self.laser_scan)
+        msg.header.stamp = self.get_clock().now().to_msg()
         self.publisher_.publish(msg)
 
 

@@ -4,6 +4,7 @@ import os
 from rclpy.node import Node
 from lidar.base_properties import BaseProperties
 from rclpy.time import Time
+from base_package.common_properties import CommonProperties
 
 RMW_IMPLEMENTATION = os.environ.get('RMW_IMPLEMENTATION', 'error')
 file_path = f'/home/ivo/PersonalData/UniKram/Haw_sem_2/Protocol Engineering/code/messurement/lidar_results_{RMW_IMPLEMENTATION}.txt'
@@ -17,7 +18,7 @@ class FinalSub(Node):
             BaseProperties.msg_type,
             'scan_final',
             self.listener_callback,
-            BaseProperties.custom_qos)
+            CommonProperties.custom_qos)
         
         self.count = 0
         self.messurement = []
@@ -28,7 +29,7 @@ class FinalSub(Node):
     
         diff = now - msg_time
 
-        if self.count <= 200:
+        if self.count <= CommonProperties.measurement_count:
             self.messurement.append(diff)
             self.get_logger().info('Diff in Seconds: %f' % (diff.nanoseconds / 1e9))
 

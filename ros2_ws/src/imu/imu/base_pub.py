@@ -2,9 +2,10 @@ import rclpy
 from rclpy.node import Node
 
 from sensor_msgs.msg import Imu
-from imu.base_properties import BaseProperties
+from base_package.common_properties import CommonProperties
 
 import random
+import copy
 
 
 class BasePublisher(Node):
@@ -12,11 +13,12 @@ class BasePublisher(Node):
     def __init__(self):
         super().__init__('base_publisher')
 
-        self.publisher_ = self.create_publisher(Imu, '/imu_data', BaseProperties.custom_qos)
-        timer_period = 1 / 500
+        self.publisher_ = self.create_publisher(Imu, '/imu_data', CommonProperties.custom_qos)
+        timer_period = 1 / 30 #500
+        self.imu = self.get_imu()
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
-    def timer_callback(self):
+    def get_imu(self):
         msg = Imu()
         msg.header.frame_id = 'imu_link'
 
@@ -39,7 +41,11 @@ class BasePublisher(Node):
         msg.orientation_covariance[0] = -1.0
         msg.angular_velocity_covariance[0] = -1.0
         msg.linear_acceleration_covariance[0] = -1.0
-        
+
+        return msg
+
+    def timer_callback(self):
+        msg = copy.deepcopy(self.imu)
         msg.header.stamp = self.get_clock().now().to_msg()
         self.publisher_.publish(msg)
 

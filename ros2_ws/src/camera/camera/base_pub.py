@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from camera.base_properties import BaseProperties
+from base_package.common_properties import CommonProperties
 import numpy as np
 
 
@@ -9,7 +10,7 @@ class BasePublisher(Node):
     def __init__(self):
         super().__init__('base_publisher')
 
-        self.publisher_ = self.create_publisher(BaseProperties.msg_type, BaseProperties.topic_prefix, BaseProperties.custom_qos)
+        self.publisher_ = self.create_publisher(BaseProperties.msg_type, BaseProperties.topic_prefix, CommonProperties.custom_qos)
         timer_period = 1 / 1
         self.timer = self.create_timer(timer_period, self.timer_callback)
 

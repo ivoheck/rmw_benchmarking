@@ -1,6 +1,7 @@
 import rclpy
 from camera.base_properties import BaseProperties
 from rclpy.node import Node
+from base_package.common_properties import CommonProperties
 
 
 class SubPub(Node):
@@ -12,13 +13,13 @@ class SubPub(Node):
         sub_topic_val = self.get_parameter('sub_topic').get_parameter_value().string_value
         pub_topic_val = self.get_parameter('pub_topic').get_parameter_value().string_value
 
-        self.publisher = self.create_publisher(BaseProperties.msg_type, pub_topic_val, BaseProperties.custom_qos)
+        self.publisher = self.create_publisher(BaseProperties.msg_type, pub_topic_val, CommonProperties.custom_qos)
 
         self.subscription = self.create_subscription(
             BaseProperties.msg_type,
             sub_topic_val,
             self.listener_callback,
-            BaseProperties.custom_qos)
+            CommonProperties.custom_qos)
 
     def listener_callback(self, msg):
         self.publisher.publish(msg)
