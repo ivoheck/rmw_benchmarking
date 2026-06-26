@@ -5,7 +5,6 @@ from sensor_msgs.msg import Imu
 from base_package.common_properties import CommonProperties
 
 import random
-import copy
 
 
 class BasePublisher(Node):
@@ -14,7 +13,7 @@ class BasePublisher(Node):
         super().__init__('base_publisher')
 
         self.publisher_ = self.create_publisher(Imu, '/imu_data', CommonProperties.custom_qos)
-        timer_period = 1 / 30 #500
+        timer_period = 1 / 500 
         self.imu = self.get_imu()
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
@@ -45,7 +44,7 @@ class BasePublisher(Node):
         return msg
 
     def timer_callback(self):
-        msg = copy.deepcopy(self.imu)
+        msg = self.imu
         msg.header.stamp = self.get_clock().now().to_msg()
         self.publisher_.publish(msg)
 

@@ -5,7 +5,6 @@ from base_package.common_properties import CommonProperties
 from sensor_msgs.msg import LaserScan
 
 import math
-import copy
 
 
 class BasePublisher(Node):
@@ -42,7 +41,7 @@ class BasePublisher(Node):
         return msg
 
     def timer_callback(self):
-        msg = copy.deepcopy(self.laser_scan)
+        msg = self.laser_scan
         msg.header.stamp = self.get_clock().now().to_msg()
         self.publisher_.publish(msg)
 
