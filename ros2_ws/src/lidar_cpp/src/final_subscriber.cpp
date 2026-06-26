@@ -8,7 +8,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
 
-const size_t MEASUREMENT_COUNT = 1000;
+const size_t MEASUREMENT_COUNT = 10000;
 
 class FinalSubscriber : public rclcpp::Node
 {
