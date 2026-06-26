@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(lidar_cpp)
+project(camera_cpp)
 
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 20)
@@ -53,6 +53,7 @@ install(TARGETS
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME}
 )
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

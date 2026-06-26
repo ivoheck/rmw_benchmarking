@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(lidar_cpp)
+project(imu_cpp)
 
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 20)
