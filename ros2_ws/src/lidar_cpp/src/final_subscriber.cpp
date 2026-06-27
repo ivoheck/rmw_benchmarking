@@ -8,8 +8,6 @@
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
 
-const size_t MEASUREMENT_COUNT = 10000;
-
 class FinalSubscriber : public rclcpp::Node
 {
 public:
@@ -20,6 +18,9 @@ public:
     std::string rmw = rmw_get_implementation_identifier();
     file_path_ = "/home/ivo/PersonalData/UniKram/Haw_sem_2/Protocol Engineering/code/messurement/lidar_cpp_results_" + rmw + ".txt";
 
+    this->declare_parameter<int64_t>("messurement_count", 0);
+    this->measurement_count_ = static_cast<size_t>(this->get_parameter("messurement_count").as_int());
+
     auto listener_callback = [this](const sensor_msgs::msg::LaserScan::SharedPtr msg) -> void {
       if (this->is_done_) {
         return;
@@ -29,7 +30,7 @@ public:
       rclcpp::Time msg_time = msg->header.stamp;
       rclcpp::Duration diff = now - msg_time;
 
-      if (this->count_ < MEASUREMENT_COUNT) {
+      if (this->count_ < measurement_count_) {
         this->measurements_.push_back(diff.nanoseconds());
         
         RCLCPP_INFO(this->get_logger(), "Diff in Seconds: %f", diff.seconds());
@@ -70,6 +71,7 @@ private:
   size_t count_;
   bool is_done_;
   std::vector<int64_t> measurements_;
+  size_t measurement_count_;
   std::string file_path_;
 };
 

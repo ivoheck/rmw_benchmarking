@@ -16,6 +16,7 @@ def evaluate_launch(context):
     ]
 
     node_count = 10
+    messurement_count = 1000
 
     for i in range(node_count):
         input_topic = topic_name if i == 0 else f'{topic_name}_{i}'
@@ -38,6 +39,9 @@ def evaluate_launch(context):
             package=package_name,
             executable='final_subscriber',
             name='final_subscriber',
+            parameters=[{
+                    'messurement_count': messurement_count,
+                }],
             on_exit=Shutdown()
         )
     )
