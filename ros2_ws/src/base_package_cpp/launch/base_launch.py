@@ -6,6 +6,9 @@ from launch.substitutions import LaunchConfiguration
 def evaluate_launch(context):
     topic_name = context.perform_substitution(LaunchConfiguration('topic_name'))
     package_name = context.perform_substitution(LaunchConfiguration('package_name'))
+    run_number = int(context.perform_substitution(LaunchConfiguration('run_number')))
+    node_count = int(context.perform_substitution(LaunchConfiguration('node_count')))
+    messurement_count = int(context.perform_substitution(LaunchConfiguration('messurement_count')))
 
     nodes = [
         Node(
@@ -14,9 +17,6 @@ def evaluate_launch(context):
             name='base_publisher',
         )
     ]
-
-    node_count = 10
-    messurement_count = 1000
 
     for i in range(node_count):
         input_topic = topic_name if i == 0 else f'{topic_name}_{i}'
@@ -41,6 +41,7 @@ def evaluate_launch(context):
             name='final_subscriber',
             parameters=[{
                     'messurement_count': messurement_count,
+                    'run_number': run_number,
                 }],
             on_exit=Shutdown()
         )

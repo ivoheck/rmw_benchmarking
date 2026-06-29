@@ -14,12 +14,15 @@ public:
   FinalSubscriber()
   : Node("final_subscriber"), count_(0), is_done_(false)
   {
-    
-    std::string rmw = rmw_get_implementation_identifier();
-    file_path_ = "/home/ivo/PersonalData/UniKram/Haw_sem_2/Protocol Engineering/code/messurement/lidar_cpp_results_" + rmw + ".txt";
-
     this->declare_parameter<int64_t>("messurement_count", 0);
     this->measurement_count_ = static_cast<size_t>(this->get_parameter("messurement_count").as_int());
+
+    this->declare_parameter<int64_t>("run_number", -1);
+    int64_t run_num_int = this->get_parameter("run_number").as_int();
+    this->run_number_ = std::to_string(run_num_int);
+
+    std::string rmw = rmw_get_implementation_identifier();
+    file_path_ = "/home/ivo/PersonalData/UniKram/Haw_sem_2/Protocol Engineering/code/messurement/lidar_cpp_results_" + rmw + "_nr_" + run_number_ + ".txt";
 
     auto listener_callback = [this](const sensor_msgs::msg::LaserScan::SharedPtr msg) -> void {
       if (this->is_done_) {
@@ -72,6 +75,7 @@ private:
   bool is_done_;
   std::vector<int64_t> measurements_;
   size_t measurement_count_;
+  std::string run_number_;
   std::string file_path_;
 };
 
