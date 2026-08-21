@@ -22,7 +22,7 @@ public:
     this->run_number_ = std::to_string(run_num_int);
 
     std::string rmw = rmw_get_implementation_identifier();
-    file_path_ = "/home/ivo/PersonalData/UniKram/Haw_sem_2/Protocol Engineering/code/messurement/imu_cpp_results_" + rmw + "_nr_" + run_number_ + ".txt";
+    file_path_ = "/messurement/imu_cpp_results_" + rmw + "_nr_" + run_number_ + ".txt";
 
     auto listener_callback = [this](const sensor_msgs::msg::Imu::SharedPtr msg) -> void {
       if (this->is_done_) {

@@ -4,11 +4,11 @@
 rm -rf ../messurement/*
 
 MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_fastrtps_dynamic_cpp")
-SENSORS=("imu" "lidar" "camera")
+SENSORS=("imu" "lidar") # "camera")
 
-NUM_RUNS=50
-NODE_COUNT=10 # +2 nodes (base pub/final sub)
-MESSUREMENT_COUNT=500
+NUM_RUNS=1
+NODE_COUNT=5 # +2 nodes (base pub/final sub)
+MESSUREMENT_COUNT=50
 
 
 for ((run=0; run<NUM_RUNS; run++)); do
