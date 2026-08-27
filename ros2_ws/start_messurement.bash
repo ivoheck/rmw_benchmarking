@@ -6,7 +6,7 @@ rm -rf ../messurement/*
 MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_fastrtps_dynamic_cpp")
 SENSORS=("imu" "lidar") # "camera")
 
-NUM_RUNS=1
+NUM_RUNS=50
 NODE_COUNT=5 # +2 nodes (base pub/final sub)
 MESSUREMENT_COUNT=50
 
@@ -62,6 +62,9 @@ for ((run=0; run<NUM_RUNS; run++)); do
 
             ((sensor_seq++))
         done
+
+        echo "=== Processes after launch ==="
+        ps -eo pid,ppid,rss,cmd --sort=-rss | head -20
         
         # Stop ROS-Daemon
         ros2 daemon stop 2>/dev/null

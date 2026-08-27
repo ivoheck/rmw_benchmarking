@@ -39,10 +39,13 @@ public:
         RCLCPP_INFO(this->get_logger(), "Diff in Seconds: %f", diff.seconds());
         this->count_++;
       } else {
-        RCLCPP_INFO(this->get_logger(), "Stop messurment");
-        this->is_done_ = true;
-        
-        throw std::runtime_error("MEASUREMENT_DONE");
+          RCLCPP_INFO(this->get_logger(), "Stop messurment");
+
+          this->is_done_ = true;
+
+          this->subscription_.reset();
+
+          rclcpp::shutdown();
       }
     };
 
@@ -85,15 +88,7 @@ int main(int argc, char * argv[])
   
   auto node = std::make_shared<FinalSubscriber>();
   
-  try {
-    rclcpp::spin(node);
-  } catch (const std::runtime_error& e) {
-    if (std::string(e.what()) == "MEASUREMENT_DONE") {
-      std::cout << "Spin kontrolliert beendet. Daten voll." << std::endl;
-    } else {
-      std::cerr << "Unerwarteter Fehler: " << e.what() << std::endl;
-    }
-  } catch (const std::exception& e) {}
+  rclcpp::spin(node);
 
   if (node->has_data()) {
     node->save_data();
