@@ -28,10 +28,10 @@ spec:
               mountPath: "/messurement"
           resources:
             requests:
-              cpu: "6"        
+              cpu: "3"        
               memory: "3Gi"
             limits:
-              cpu: "6"         
+              cpu: "3"         
               memory: "3Gi"
       imagePullSecrets:
         - name: haw-ros-rwm-m-secret
