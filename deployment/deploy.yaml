@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: haw-ros-rwm-messurement
+  namespace: ${NAMESPACE}
+  labels:
+    service: haw-ros-rwm-messurement
+spec:
+  selector:
+    matchLabels:
+      service: haw-ros-rwm-messurement
+  template:
+    metadata:
+      labels:
+        service: haw-ros-rwm-messurement
+    spec:
+      containers:
+        - name: haw-ros-rwm-messurement
+          image: git.haw-hamburg.de:5000/inf${NAMESPACE}/haw-ros-rwm-messurement
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: measurement-data
+              mountPath: "/messurement"
+      imagePullSecrets:
+        - name: haw-ros-rwm-m-secret
+      volumes:
+        - name: measurement-data
+          persistentVolumeClaim:
+            claimName: ros-measurement-pvc
