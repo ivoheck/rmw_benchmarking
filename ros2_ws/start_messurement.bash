@@ -7,7 +7,7 @@ mkdir -p "$MEASUREMENT_OUTPUT_DIR"
 echo "Save Mesurement at: $MEASUREMENT_OUTPUT_DIR"
 
 MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_fastrtps_dynamic_cpp")
-SENSORS=("imu" "lidar") # "camera")
+SENSORS=("imu" "lidar" "camera")
 
 NUM_RUNS=50
 NODE_COUNT=5 # +2 nodes (base pub/final sub)
