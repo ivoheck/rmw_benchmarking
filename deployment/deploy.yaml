@@ -26,6 +26,13 @@ spec:
           volumeMounts:
             - name: measurement-data
               mountPath: "/messurement"
+          resources:
+            requests:
+              cpu: "6"        
+              memory: "3Gi"
+            limits:
+              cpu: "6"         
+              memory: "3Gi"
       imagePullSecrets:
         - name: haw-ros-rwm-m-secret
       volumes:
