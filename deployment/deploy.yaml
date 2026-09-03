@@ -6,6 +6,9 @@ metadata:
   labels:
     service: haw-ros-rwm-messurement
 spec:
+  strategy:
+    type: Recreate
+  replicas: 1
   selector:
     matchLabels:
       service: haw-ros-rwm-messurement
