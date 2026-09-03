@@ -13,6 +13,24 @@ NUM_RUNS=50
 NODE_COUNT=5 # +2 nodes (base pub/final sub)
 MESSUREMENT_COUNT=50
 
+START_TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+START_EPOCH=$(date +%s)
+METADATA_FILE="$MEASUREMENT_OUTPUT_DIR/metadata.yaml"
+
+cat <<EOF > "$METADATA_FILE"
+benchmark_metadata:
+  session_name: "$SESSION_DATE"
+  start_time: "$START_TIMESTAMP"
+  parameters:
+    num_runs: $NUM_RUNS
+    node_count: $NODE_COUNT
+    measurement_count: $MESSUREMENT_COUNT
+    sensors: [$(printf '"%s", ' "${SENSORS[@]}" | sed 's/, $//')]
+    middlewares: [$(printf '"%s", ' "${MIDDLEWARES[@]}" | sed 's/, $//')]
+  system_info:
+    hostname: "$(hostname)"
+    kernel: "$(uname -r)"
+EOF
 
 for ((run=0; run<NUM_RUNS; run++)); do
     RUN_NUM=$((run+1))
@@ -84,3 +102,13 @@ for ((run=0; run<NUM_RUNS; run++)); do
         echo "----------------------------------------"
     done
 done
+
+END_TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+END_EPOCH=$(date +%s)
+DURATION_SECONDS=$((END_EPOCH - START_EPOCH))
+
+cat <<EOF >> "$METADATA_FILE"
+  end_time: "$END_TIMESTAMP"
+  total_duration_seconds: $DURATION_SECONDS
+  status: "COMPLETED"
+EOF
