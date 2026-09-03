@@ -21,8 +21,10 @@ public:
     int64_t run_num_int = this->get_parameter("run_number").as_int();
     this->run_number_ = std::to_string(run_num_int);
 
+    const char* env_dir = std::getenv("MEASUREMENT_OUTPUT_DIR");
+    std::string base_dir = (env_dir != nullptr) ? std::string(env_dir) : "/messurement";
     std::string rmw = rmw_get_implementation_identifier();
-    file_path_ = "/messurement/camera_cpp_results_" + rmw + "_nr_" + run_number_ + ".txt";
+    file_path_ = base_dir + "/camera_cpp_results_" + rmw + "_nr_" + run_number_ + ".txt";
 
     auto listener_callback = [this](const sensor_msgs::msg::Image::SharedPtr msg) -> void {
       if (this->is_done_) {

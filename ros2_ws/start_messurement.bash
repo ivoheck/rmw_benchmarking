@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Remove data from last Run
-rm -rf ../messurement/*
+SESSION_DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+export MEASUREMENT_OUTPUT_DIR="/messurement/$SESSION_DATE"
+
+mkdir -p "$MEASUREMENT_OUTPUT_DIR"
+echo "Save Mesurement at: $MEASUREMENT_OUTPUT_DIR"
 
 MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_fastrtps_dynamic_cpp")
 SENSORS=("imu" "lidar") # "camera")
