@@ -1,37 +1,30 @@
-kind: Deployment
-apiVersion: apps/v1
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: haw-ros-rwm-messurement
   namespace: ${NAMESPACE}
   labels:
     service: haw-ros-rwm-messurement
 spec:
-  strategy:
-    type: Recreate
-  replicas: 1
-  selector:
-    matchLabels:
-      service: haw-ros-rwm-messurement
+  backoffLimit: 2 
   template:
     metadata:
       labels:
         service: haw-ros-rwm-messurement
     spec:
+      restartPolicy: OnFailure  # or Never
       containers:
         - name: haw-ros-rwm-messurement
           image: git.haw-hamburg.de:5000/inf${NAMESPACE}/haw-ros-rwm-messurement
-          ports:
-            - containerPort: 80
-              protocol: TCP
           volumeMounts:
             - name: measurement-data
               mountPath: "/messurement"
           resources:
             requests:
-              cpu: "3"        
+              cpu: "3"
               memory: "3Gi"
             limits:
-              cpu: "3"         
+              cpu: "3"
               memory: "3Gi"
       imagePullSecrets:
         - name: haw-ros-rwm-m-secret

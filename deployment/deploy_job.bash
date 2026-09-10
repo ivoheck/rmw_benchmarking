@@ -7,16 +7,14 @@ set +a
 IMAGE_NAME="haw-ros-rwm-messurement"
 REGISTRY_PATH="git.haw-hamburg.de:5000/infwjg901/haw-ros-rwm-messurement"
 
-sudo docker build -t "$IMAGE_NAME" ..
+sudo docker build --provenance=false --sbom=false -t "$REGISTRY_PATH:latest" ..
 
 echo "$DEPLOY_TOKEN" | docker login git.haw-hamburg.de:5000 -u haw-deploy-token --password-stdin
 sudo docker tag "$IMAGE_NAME" "$REGISTRY_PATH:latest"
 sudo docker push "$REGISTRY_PATH:latest"
 
 envsubst < pvc.yaml | kubectl apply --validate=false -f -
-envsubst < deploy.yaml | kubectl apply --validate=false -f -
-envsubst < service.yaml | kubectl apply --validate=false -f -
+envsubst < job.yaml | kubectl delete --ignore-not-found -f -
+envsubst < job.yaml | kubectl apply --validate=false -f -
 
-kubectl rollout restart deployment/haw-ros-rwm-messurement
-
-kubectl get pods,deploy,svc
+kubectl get jobs,pods -n "$NAMESPACE"
