@@ -51,9 +51,15 @@ public:
       }
     };
 
+    rclcpp::QoS camera_image_qos(rclcpp::KeepLast(1));
+
+    camera_image_qos
+      .reliable()
+      .durability_volatile();
+
     subscription_ = this->create_subscription<sensor_msgs::msg::Image>(
       "/camera_final", 
-      rclcpp::QoS(10), 
+      camera_image_qos, 
       listener_callback
     );
   }

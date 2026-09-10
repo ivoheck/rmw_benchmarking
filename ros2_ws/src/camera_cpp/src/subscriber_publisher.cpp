@@ -19,8 +19,13 @@ public:
     std::string input_topic = this->get_parameter("input_topic").as_string();
     std::string output_topic = this->get_parameter("output_topic").as_string();
 
-    // TODO: use own Qos
-    publisher_ = this->create_publisher<sensor_msgs::msg::Image>(output_topic, rclcpp::QoS(10));
+    rclcpp::QoS camera_image_qos(rclcpp::KeepLast(1));
+
+    camera_image_qos
+      .reliable()
+      .durability_volatile();
+
+    publisher_ = this->create_publisher<sensor_msgs::msg::Image>(output_topic, camera_image_qos);
 
     auto topic_callback =
       [this](sensor_msgs::msg::Image::UniquePtr msg) -> void {
@@ -28,7 +33,7 @@ public:
     };
       // TODO: use own Qos
     subscription_ =
-      this->create_subscription<sensor_msgs::msg::Image>(input_topic, rclcpp::QoS(10), topic_callback);
+      this->create_subscription<sensor_msgs::msg::Image>(input_topic, camera_image_qos, topic_callback);
   }
 
 private:

@@ -14,8 +14,13 @@ public:
   BasePublisher()
   : Node("base_publisher")
   {
-    // TODO: use own Qos
-    publisher_ = this->create_publisher<sensor_msgs::msg::Image>("/camera", rclcpp::QoS(10));
+    rclcpp::QoS camera_image_qos(rclcpp::KeepLast(1));
+
+    camera_image_qos
+      .reliable()
+      .durability_volatile();
+
+    publisher_ = this->create_publisher<sensor_msgs::msg::Image>("/camera", camera_image_qos);
     auto period = std::chrono::duration<double>(1.0 / 1.0);
 
     prepare_image_msg();

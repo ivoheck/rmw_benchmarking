@@ -14,7 +14,6 @@ public:
   BasePublisher()
   : Node("base_publisher")
   {
-    // TODO: use own Qos
     publisher_ = this->create_publisher<sensor_msgs::msg::LaserScan>("/scan", rclcpp::SensorDataQoS());
     auto period = std::chrono::duration<double>(1.0 / 30.0);
 
