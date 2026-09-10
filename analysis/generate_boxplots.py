@@ -85,19 +85,25 @@ if df_samples.empty:
 
 sns.set_theme(style="whitegrid")
 
-# 4. Boxplots pro Sensortyp generieren
-for sensor_type in df_samples["Sensor"].unique():
+# 4. Kombinierte Figure erstellen
+unique_sensors = sorted(df_samples["Sensor"].unique())
+num_sensors = len(unique_sensors)
+
+# Dynamische Bildgröße: ca. 6.5 Zoll Breite pro Sensor
+fig, axes = plt.subplots(1, num_sensors, figsize=(6.5 * num_sensors, 6.0), squeeze=False)
+axes = axes.flatten()
+
+for idx, sensor_type in enumerate(unique_sensors):
+    ax = axes[idx]
     df_sensor = df_samples[df_samples["Sensor"] == sensor_type].copy()
     
     raw_max = df_sensor["Latenz (µs)"].max()
     
-    # --- SAUBERE AUSREISSER-FILTERUNG (ohne KeyError) ---
-    # Berechnung der Schwellwerte je RMW über transform
+    # Ausreißer-Bereinigung je RMW
     q25 = df_sensor.groupby("RMW Implementation")["Latenz (µs)"].transform(lambda x: x.quantile(0.25))
     q75 = df_sensor.groupby("RMW Implementation")["Latenz (µs)"].transform(lambda x: x.quantile(0.75))
     cutoff = q75 + (1.5 * (q75 - q25))
     
-    # Nur Datenpunkte unterhalb der oberen Whisker-Grenze behalten
     df_cleaned = df_sensor[df_sensor["Latenz (µs)"] <= cutoff].copy()
     
     cleaned_max = df_cleaned["Latenz (µs)"].max()
@@ -117,10 +123,7 @@ for sensor_type in df_samples["Sensor"].unique():
         for rmw in rmw_order
     }
     
-    fig_width = max(8, len(rmw_order) * 1.8)
-    fig, ax = plt.subplots(figsize=(fig_width, 6.0))
-    
-    # Boxplot mit bereinigten Daten
+    # Boxplot in das jeweilige Subplot-Axes-Objekt zeichnen
     sns.boxplot(
         data=df_cleaned,
         x="RMW Implementation",
@@ -130,7 +133,7 @@ for sensor_type in df_samples["Sensor"].unique():
         hue="RMW Implementation",
         legend=False,
         showmeans=True,
-        showfliers=False,  # Keine Ausreißerpunkte zeichnen
+        showfliers=False,
         meanprops={
             "marker": "^", 
             "markerfacecolor": "white", 
@@ -140,28 +143,23 @@ for sensor_type in df_samples["Sensor"].unique():
         ax=ax
     )
     
-    # Dynamisch zugeschnittene Y-Achse
+    # Eigene dynamische Y-Achsenskalierung pro Sensor-Plot
     padding = (cleaned_max - cleaned_min) * 0.1
     ax.set_ylim(bottom=max(0, cleaned_min - padding), top=cleaned_max + padding)
     
-    # 'bold' statt 'semibold' verhindert die Font-Warnungen im Terminal
-    plt.title(
-        f"ROS 2 Latenzverteilung: {sensor_type}-Daten", 
-        fontsize=14, 
-        fontweight='bold', 
-        pad=15
-    )
-    plt.xlabel("Middleware-Implementierung (RMW)", fontsize=11, fontweight='bold', labelpad=12)
-    plt.ylabel("Latenz [µs]", fontsize=11, fontweight='bold', labelpad=12)
-    plt.xticks(rotation=15, ha='right', fontsize=10)
-    
-    plt.tight_layout()
-    
-    # 5. Speichern
-    output_filename = f"boxplot_{sensor_type.lower()}_by_rmw.png"
-    save_path = os.path.join(image_output_dir, output_filename)
-    
-    plt.savefig(save_path, dpi=300)
-    plt.close(fig)
-    
-    print(f"Boxplot gespeichert: {save_path}")
+    ax.set_title(f"{sensor_type}", fontsize=13, fontweight='bold', pad=12)
+    ax.set_xlabel("Middleware-Implementierung (RMW)", fontsize=10, fontweight='bold', labelpad=10)
+    ax.set_ylabel("Latenz [µs]", fontsize=10, fontweight='bold', labelpad=10)
+    ax.tick_params(axis='x', rotation=20)
+
+plt.suptitle("ROS 2 Latenzverteilung nach Sensortyp", fontsize=15, fontweight='bold', y=1.02)
+plt.tight_layout()
+
+# 5. Gemeinsames Bild speichern
+output_filename = "boxplots_all_sensors_combined.png"
+save_path = os.path.join(image_output_dir, output_filename)
+
+plt.savefig(save_path, dpi=300, bbox_inches='tight')
+plt.close(fig)
+
+print(f"\nKombiniertes Diagramm erfolgreich gespeichert: {save_path}")

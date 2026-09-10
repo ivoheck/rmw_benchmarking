@@ -8,11 +8,10 @@ import seaborn as sns
 # 1. Pfade definieren
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Zielordner 'images' auf Höhe des Skripts
+# Zielordner 'images' auf Skripthöhe
 image_output_dir = os.path.join(script_dir, "images")
 os.makedirs(image_output_dir, exist_ok=True)
 
-# Basis-Pfad zu den Messungen
 base_measurement_dir = os.path.join(script_dir, "../messurement")
 
 # 2. Feste Basisfarben für die RMW-Implementierungen
@@ -23,9 +22,8 @@ RMW_BASE_COLORS = {
     "rmw_zenoh_cpp": "#d62728",         # Rot
     "rmw_gurumdds_cpp": "#9467bd"       # Lila
 }
-DEFAULT_BASE_COLOR = "#7f7f7f"         # Grau für unbekannte RMWs
+DEFAULT_BASE_COLOR = "#7f7f7f"
 
-# Alle Unterordner im Messverzeichnis ermitteln
 if not os.path.exists(base_measurement_dir):
     print(f"Fehler: Das Verzeichnis '{base_measurement_dir}' existiert nicht!")
     exit(1)
@@ -40,7 +38,7 @@ if not subfolders:
     print(f"Keine Messordner in '{base_measurement_dir}' gefunden!")
     exit(1)
 
-# 3. Alle Ordner zusammen einlesen
+# 3. Alle Einzelwerte einlesen und summieren
 all_raw_data = []
 
 for folder_path in sorted(subfolders):
@@ -99,8 +97,15 @@ df = df_raw.groupby(
 
 sns.set_theme(style="whitegrid")
 
-# 5. Diagramme pro Sensortyp generieren
-for sensor_type in df["Sensor"].unique():
+# 5. Kombinierte Figure erstellen (1 Zeile, N Spalten)
+unique_sensors = sorted(df["Sensor"].unique())
+num_sensors = len(unique_sensors)
+
+fig, axes = plt.subplots(1, num_sensors, figsize=(6.5 * num_sensors, 6.5), squeeze=False)
+axes = axes.flatten()
+
+for idx, sensor_type in enumerate(unique_sensors):
+    ax = axes[idx]
     df_filtered = df[df["Sensor"] == sensor_type].copy()
     
     # RMWs nach kumulierter Gesamtdauer aufsteigend sortieren
@@ -114,9 +119,6 @@ for sensor_type in df["Sensor"].unique():
     unique_runs = sorted(df_filtered["Durchlauf (Ordner)"].unique())
     num_runs = len(unique_runs)
 
-    fig_width = max(9, len(rmw_order) * max(2.2, num_runs * 0.7))
-    fig, ax = plt.subplots(figsize=(fig_width, 6.5))
-    
     barplot = sns.barplot(
         data=df_filtered,
         x="RMW Implementation",
@@ -126,15 +128,14 @@ for sensor_type in df["Sensor"].unique():
         ax=ax
     )
     
-    # Legende entfernen
+    # Legende aus dem jeweiligen Subplot entfernen
     if ax.get_legend() is not None:
         ax.get_legend().remove()
     
-    # Einheitliche RMW-Farben mit feiner dunkler Kontur
+    # RMW-Farben mit feiner Kontur anwenden
     for run_idx in range(num_runs):
         for rmw_idx, rmw_name in enumerate(rmw_order):
             base_col = RMW_BASE_COLORS.get(rmw_name, DEFAULT_BASE_COLOR)
-            
             patch_idx = run_idx * len(rmw_order) + rmw_idx
             if patch_idx < len(barplot.patches):
                 patch = barplot.patches[patch_idx]
@@ -142,44 +143,40 @@ for sensor_type in df["Sensor"].unique():
                 patch.set_edgecolor("#222222")
                 patch.set_linewidth(0.8)
 
-    # Nur der prägnante Haupttitel (zentriert)
-    plt.title(
-        f"ROS 2 Performance-Benchmark: {sensor_type}-Daten",
-        fontsize=14,
-        fontweight='bold',
-        pad=15
-    )
-    
-    plt.xlabel("Middleware-Implementierung (RMW)", fontsize=11, fontweight='semibold', labelpad=12)
-    plt.ylabel("Gesamtlaufzeit [ms]", fontsize=11, fontweight='semibold', labelpad=12)
-    plt.xticks(rotation=15, ha='right', fontsize=10)
+    # Subplot-Titel und Achsen
+    ax.set_title(f"{sensor_type}", fontsize=13, fontweight='bold', pad=12)
+    ax.set_xlabel("Middleware-Implementierung (RMW)", fontsize=10, fontweight='bold', labelpad=10)
+    ax.set_ylabel("Gesamtlaufzeit [ms]", fontsize=10, fontweight='bold', labelpad=10)
+    ax.tick_params(axis='x', rotation=20)
     
     # Zahlenwerte über den Balken
     for p in barplot.patches:
         height = p.get_height()
         if height > 0:
             formatted_val = f"{height:,.1f}".replace(",", "X").replace(".", ",").replace("X", ".")
-            barplot.annotate(
+            ax.annotate(
                 f"{formatted_val} ms",
                 (p.get_x() + p.get_width() / 2., height),
                 ha='center', va='bottom',
                 xytext=(0, 4), 
                 textcoords='offset points', 
                 fontsize=8,
-                fontweight='semibold',
+                fontweight='bold',
                 rotation=45
             )
             
-    # Y-Achse nach oben leicht erweitern, damit Labels nicht abgeschnitten werden
-    ax.set_ylim(top=ax.get_ylim()[1] * 1.12)
-    
-    plt.tight_layout()
-    
-    # 6. Bild speichern
-    output_filename = f"benchmark_{sensor_type.lower()}_by_rmw.png"
-    save_path = os.path.join(image_output_dir, output_filename)
-    
-    plt.savefig(save_path, dpi=300)
-    plt.close(fig)
-    
-    print(f"Diagramm gespeichert: {save_path}")
+    # Y-Achse nach oben erweitern, damit Labels nicht abgeschnitten werden
+    ax.set_ylim(top=ax.get_ylim()[1] * 1.15)
+
+# Gesamttitel für das Gesamtbild
+plt.suptitle("ROS 2 Performance-Benchmark nach Sensortyp", fontsize=15, fontweight='bold', y=1.02)
+plt.tight_layout()
+
+# 6. Kombiniertes Bild speichern
+output_filename = "benchmarks_all_sensors_combined.png"
+save_path = os.path.join(image_output_dir, output_filename)
+
+plt.savefig(save_path, dpi=300, bbox_inches='tight')
+plt.close(fig)
+
+print(f"\nKombiniertes Benchmark-Diagramm erfolgreich gespeichert: {save_path}")
