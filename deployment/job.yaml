@@ -6,7 +6,9 @@ metadata:
   labels:
     service: haw-ros-rwm-messurement
 spec:
-  backoffLimit: 2 
+  completions: 3         
+  parallelism: 1
+  backoffLimit: 0
   template:
     metadata:
       labels:
