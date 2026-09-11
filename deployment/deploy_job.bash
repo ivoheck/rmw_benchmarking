@@ -7,7 +7,7 @@ set +a
 IMAGE_NAME="haw-ros-rwm-messurement"
 REGISTRY_PATH="git.haw-hamburg.de:5000/infwjg901/haw-ros-rwm-messurement"
 
-sudo docker build --provenance=false --sbom=false -t "$REGISTRY_PATH:latest" ..
+sudo docker build --provenance=false --sbom=false -t "$IMAGE_NAME" ..
 
 echo "$DEPLOY_TOKEN" | docker login git.haw-hamburg.de:5000 -u haw-deploy-token --password-stdin
 sudo docker tag "$IMAGE_NAME" "$REGISTRY_PATH:latest"

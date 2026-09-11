@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SESSION_DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+SESSION_DATE=$(date -u +"%Y-%m-%d_%H-%M-%SZ")
 export MEASUREMENT_OUTPUT_DIR="/messurement/$SESSION_DATE"
 
 mkdir -p "$MEASUREMENT_OUTPUT_DIR"
@@ -13,14 +13,17 @@ NUM_RUNS=50
 NODE_COUNT=5 # +2 nodes (base pub/final sub)
 MESSUREMENT_COUNT=50
 
-START_TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+START_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 START_EPOCH=$(date +%s)
 METADATA_FILE="$MEASUREMENT_OUTPUT_DIR/metadata.yaml"
+
+CONTAINER_IMAGE_TAG="${IMAGE_TAG:-unknown}"
 
 cat <<EOF > "$METADATA_FILE"
 benchmark_metadata:
   session_name: "$SESSION_DATE"
   start_time: "$START_TIMESTAMP"
+  image_tag: "$CONTAINER_IMAGE_TAG"
   parameters:
     num_runs: $NUM_RUNS
     node_count: $NODE_COUNT

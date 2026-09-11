@@ -15,7 +15,8 @@ spec:
       restartPolicy: OnFailure  # or Never
       containers:
         - name: haw-ros-rwm-messurement
-          image: git.haw-hamburg.de:5000/inf${NAMESPACE}/haw-ros-rwm-messurement
+          image: git.haw-hamburg.de:5000/inf${NAMESPACE}/haw-ros-rwm-messurement:${IMAGE_TAG}
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: measurement-data
               mountPath: "/messurement"
@@ -26,6 +27,9 @@ spec:
             limits:
               cpu: "3"
               memory: "3Gi"
+          env:
+            - name: IMAGE_TAG
+              value: "${IMAGE_TAG}"
       imagePullSecrets:
         - name: haw-ros-rwm-m-secret
       volumes:
