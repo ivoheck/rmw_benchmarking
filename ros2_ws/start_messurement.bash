@@ -9,7 +9,7 @@ echo "Save Mesurement at: $MEASUREMENT_OUTPUT_DIR"
 MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_fastrtps_dynamic_cpp")
 SENSORS=("imu" "lidar" "camera")
 
-NUM_RUNS=50
+NUM_RUNS=1
 NODE_COUNT=5 # +2 nodes (base pub/final sub)
 MESSUREMENT_COUNT=50
 
@@ -18,6 +18,18 @@ START_EPOCH=$(date +%s)
 METADATA_FILE="$MEASUREMENT_OUTPUT_DIR/metadata.yaml"
 
 CONTAINER_IMAGE_TAG="${IMAGE_TAG:-unknown}"
+
+get_pkg_version() {
+    local pkg_name="$1"
+    local version
+    version=$(dpkg-query -W -f='${Version}' "$pkg_name" 2>/dev/null)
+    echo "${version:-unknown}"
+}
+
+ROS_DISTRO_VER="${ROS_DISTRO:-unknown}"
+FAST_DDS_VER=$(get_pkg_version "ros-${ROS_DISTRO:-lyrical}-rmw-fastrtps-cpp")
+CYCLONE_DDS_VER=$(get_pkg_version "ros-${ROS_DISTRO:-lyrical}-rmw-cyclonedds-cpp")
+ZENOH_RMW_VER=$(get_pkg_version "ros-${ROS_DISTRO:-lyrical}-rmw-zenoh-cpp")
 
 cat <<EOF > "$METADATA_FILE"
 benchmark_metadata:
@@ -30,6 +42,13 @@ benchmark_metadata:
     measurement_count: $MESSUREMENT_COUNT
     sensors: [$(printf '"%s", ' "${SENSORS[@]}" | sed 's/, $//')]
     middlewares: [$(printf '"%s", ' "${MIDDLEWARES[@]}" | sed 's/, $//')]
+  software_versions:
+    ros_distro: "$ROS_DISTRO_VER"
+    rmw_fastrtps_cpp: "$FAST_DDS_VER"
+    rmw_cyclonedds_cpp: "$CYCLONE_DDS_VER"
+    rmw_zenoh_cpp: "$ZENOH_RMW_VER"
+    lib_fastrtps: "$LIB_FASTRTPS_VER"
+    lib_cyclonedds: "$LIB_CYCLONEDDS_VER"
   system_info:
     hostname: "$(hostname)"
     kernel: "$(uname -r)"
