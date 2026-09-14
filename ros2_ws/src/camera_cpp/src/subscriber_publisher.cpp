@@ -19,11 +19,11 @@ public:
     std::string input_topic = this->get_parameter("input_topic").as_string();
     std::string output_topic = this->get_parameter("output_topic").as_string();
 
-    rclcpp::QoS camera_image_qos(rclcpp::KeepLast(1));
+    rclcpp::QoS camera_image_qos = rclcpp::SensorDataQoS();
 
     camera_image_qos
-      .reliable()
-      .durability_volatile();
+      .keep_last(1)  
+      .reliable();
 
     publisher_ = this->create_publisher<sensor_msgs::msg::Image>(output_topic, camera_image_qos);
 

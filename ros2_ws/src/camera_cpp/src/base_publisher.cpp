@@ -14,11 +14,11 @@ public:
   BasePublisher()
   : Node("base_publisher")
   {
-    rclcpp::QoS camera_image_qos(rclcpp::KeepLast(1));
+    rclcpp::QoS camera_image_qos = rclcpp::SensorDataQoS();
 
     camera_image_qos
-      .reliable()
-      .durability_volatile();
+      .keep_last(1)  
+      .reliable();
 
     publisher_ = this->create_publisher<sensor_msgs::msg::Image>("/camera", camera_image_qos);
     auto period = std::chrono::duration<double>(1.0 / 1.0);
@@ -47,7 +47,14 @@ private:
     }
   void publish_msg()
   {
-    msg_.header.stamp = this->now();
+    auto now_steady = std::chrono::steady_clock::now();
+    uint64_t nanoseconds_since_epoch = std::chrono::duration_cast<std::chrono::nanoseconds>(
+      now_steady.time_since_epoch()
+    ).count();
+
+    msg_.header.stamp.sec = static_cast<int32_t>(nanoseconds_since_epoch / 1'000'000'000ULL);
+    msg_.header.stamp.nanosec = static_cast<uint32_t>(nanoseconds_since_epoch % 1'000'000'000ULL);
+    
     publisher_->publish(msg_);
   }
 

@@ -45,7 +45,14 @@ private:
 
   void publish_msg()
   {    
-    msg_.header.stamp = this->now();
+    auto now_steady = std::chrono::steady_clock::now();
+    uint64_t nanoseconds_since_epoch = std::chrono::duration_cast<std::chrono::nanoseconds>(
+      now_steady.time_since_epoch()
+    ).count();
+
+    msg_.header.stamp.sec = static_cast<int32_t>(nanoseconds_since_epoch / 1'000'000'000ULL);
+    msg_.header.stamp.nanosec = static_cast<uint32_t>(nanoseconds_since_epoch % 1'000'000'000ULL);
+    
     publisher_->publish(msg_);
   }
 

@@ -142,7 +142,7 @@ with open(typst_path, "w", encoding="utf-8") as f:
     )
     f.write("    table.header(\n")
     f.write(
-        "      [*Sensor*], [*RMW*], [*Runs*], [*Samples*], [*Mittel [ms]*],"
+        "      [*Sensor*], [*RMW*], [*Runs*], [*Samples*], [*Mittelwert [ms]*],"
         " [*Kette [ms]*], [*Hop [ms]*], [*CV [%]*], [*Spanne [%]*]\n"
     )
     f.write("    ),\n")
@@ -163,3 +163,5 @@ with open(typst_path, "w", encoding="utf-8") as f:
         " Hops)],\n"
     )
     f.write(")\n")
+
+#TODO: hier immer die selbe reihenvollge der middleware verwenden

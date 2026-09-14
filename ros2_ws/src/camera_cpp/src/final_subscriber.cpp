@@ -26,21 +26,34 @@ public:
     std::string rmw = rmw_get_implementation_identifier();
     file_path_ = base_dir + "/camera_cpp_results_" + rmw + "_nr_" + run_number_ + ".txt";
 
+    if (measurement_count_ > 0) {
+      measurements_.reserve(measurement_count_);
+    }
+
     auto listener_callback = [this](const sensor_msgs::msg::Image::SharedPtr msg) -> void {
+      uint64_t receive_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
+        std::chrono::steady_clock::now().time_since_epoch()
+      ).count();
+
       if (this->is_done_) {
         return;
       }
 
-      rclcpp::Time now = this->now();
-      rclcpp::Time msg_time = msg->header.stamp;
-      rclcpp::Duration diff = now - msg_time;
+      uint64_t send_ns = static_cast<uint64_t>(msg->header.stamp.sec) * 1'000'000'000ULL 
+                 + msg->header.stamp.nanosec;
+
+      uint64_t latency_ns = receive_ns - send_ns;
 
       if (this->count_ < measurement_count_) {
-        this->measurements_.push_back(diff.nanoseconds());
+        this->measurements_.push_back(static_cast<int64_t>(latency_ns));
         
-        RCLCPP_INFO(this->get_logger(), "Diff in Seconds: %f", diff.seconds());
+        double latency_ms = static_cast<double>(latency_ns) / 1'000'000.0;
+        RCLCPP_INFO(this->get_logger(), "Latenz: %.3f ms (%lu ns)", latency_ms, latency_ns);
+
         this->count_++;
-      } else {
+      } 
+      
+      if (this->count_ >= measurement_count_) {
         RCLCPP_INFO(this->get_logger(), "Stop messurment");
 
         this->is_done_ = true;
@@ -51,11 +64,11 @@ public:
       }
     };
 
-    rclcpp::QoS camera_image_qos(rclcpp::KeepLast(1));
+    rclcpp::QoS camera_image_qos = rclcpp::SensorDataQoS();
 
     camera_image_qos
-      .reliable()
-      .durability_volatile();
+      .keep_last(1)  
+      .reliable();
 
     subscription_ = this->create_subscription<sensor_msgs::msg::Image>(
       "/camera_final", 
@@ -102,5 +115,5 @@ int main(int argc, char * argv[])
     node->save_data();
   }
 
-  rclcpp::shutdown();
+  return 0;
 }

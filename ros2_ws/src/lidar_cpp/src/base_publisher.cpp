@@ -30,7 +30,6 @@ private:
       msg_.angle_min = -3.0 * M_PI / 4.0;      
       msg_.angle_max = 3.0 * M_PI / 4.0;       
 
-      // Winkelauflösung: 0.25 Grad in Radian (0.25 * M_PI / 180.0 = ~0.00436 rad)
       msg_.angle_increment = (0.25 * M_PI) / 180.0; 
 
       msg_.time_increment = 0.030f / 1081.0f;
@@ -42,13 +41,19 @@ private:
       
       size_t num_readings = 1081;
       
-      // Synthetische Messwerte (z. B. 3.5 Meter Entfernung und Intensität 1.0)
       msg_.ranges = std::vector<float>(num_readings, 3.5f);
       msg_.intensities = std::vector<float>(num_readings, 1.0f);
     }
   void publish_scan()
   {
-    msg_.header.stamp = this->now();
+    auto now_steady = std::chrono::steady_clock::now();
+    uint64_t nanoseconds_since_epoch = std::chrono::duration_cast<std::chrono::nanoseconds>(
+      now_steady.time_since_epoch()
+    ).count();
+
+    msg_.header.stamp.sec = static_cast<int32_t>(nanoseconds_since_epoch / 1'000'000'000ULL);
+    msg_.header.stamp.nanosec = static_cast<uint32_t>(nanoseconds_since_epoch % 1'000'000'000ULL);
+
     publisher_->publish(msg_);
   }
 

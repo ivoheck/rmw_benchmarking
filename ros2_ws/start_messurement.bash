@@ -9,9 +9,9 @@ echo "Save Mesurement at: $MEASUREMENT_OUTPUT_DIR"
 MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_fastrtps_dynamic_cpp")
 SENSORS=("imu" "lidar" "camera")
 
-NUM_RUNS=1
+NUM_RUNS=10
 NODE_COUNT=5 # +2 nodes (base pub/final sub)
-MESSUREMENT_COUNT=50
+MESSUREMENT_COUNT=300
 
 START_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 START_EPOCH=$(date +%s)
@@ -47,8 +47,6 @@ benchmark_metadata:
     rmw_fastrtps_cpp: "$FAST_DDS_VER"
     rmw_cyclonedds_cpp: "$CYCLONE_DDS_VER"
     rmw_zenoh_cpp: "$ZENOH_RMW_VER"
-    lib_fastrtps: "$LIB_FASTRTPS_VER"
-    lib_cyclonedds: "$LIB_CYCLONEDDS_VER"
   system_info:
     hostname: "$(hostname)"
     kernel: "$(uname -r)"
