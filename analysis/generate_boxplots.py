@@ -62,8 +62,8 @@ for folder_path in sorted(subfolders):
                         continue
                     
                     entry_count += 1
-                    # Erste 10 Einträge (Warm-up) verwerfen
-                    if entry_count <= 10:
+                    # Erste 50 Einträge (Warm-up) verwerfen
+                    if entry_count <= 50:
                         continue
                     
                     number_part = cleaned_line.split()[0]

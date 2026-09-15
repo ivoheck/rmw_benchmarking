@@ -65,8 +65,8 @@ for folder_path in sorted(subfolders):
                         continue
                     
                     entry_count += 1
-                    # Erste 10 Einträge überspringen (Warm-up-Phase)
-                    if entry_count <= 10:
+                    # Erste 50 Einträge überspringen (Warm-up-Phase)
+                    if entry_count <= 50:
                         continue
                     
                     number_part = cleaned_line.split()[0]
