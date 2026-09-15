@@ -9,7 +9,7 @@ echo "Save Mesurement at: $MEASUREMENT_OUTPUT_DIR"
 MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_fastrtps_dynamic_cpp")
 SENSORS=("imu" "lidar" "camera")
 
-NUM_RUNS=10
+NUM_RUNS=20
 NODE_COUNT=5 # +2 nodes (base pub/final sub)
 MESSUREMENT_COUNT=300
 
