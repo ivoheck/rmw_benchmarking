@@ -6,9 +6,6 @@ set -a
 source .env
 set +a
 
-
-export GIT_HASH=$(git rev-parse --short HEAD)
-export IMAGE_TAG="${GIT_HASH}"
 REGISTRY_URL="git.haw-hamburg.de:5000/inf${NAMESPACE}/haw-ros-rwm-messurement"
 FULL_IMAGE="${REGISTRY_URL}:${IMAGE_TAG}"
 
