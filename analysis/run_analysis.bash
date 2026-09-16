@@ -1,0 +1,3 @@
+python3 generate_boxplots.py
+python3 generate_results.py
+python3 calculate_reproducibility.py

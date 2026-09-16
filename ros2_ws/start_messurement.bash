@@ -9,7 +9,7 @@ echo "Save Mesurement at: $MEASUREMENT_OUTPUT_DIR"
 MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_fastrtps_dynamic_cpp")
 SENSORS=("imu" "lidar" "camera")
 
-NUM_RUNS=20
+NUM_RUNS=25
 NODE_COUNT=5 # +2 nodes (base pub/final sub)
 MESSUREMENT_COUNT=300
 
@@ -40,6 +40,7 @@ benchmark_metadata:
     num_runs: $NUM_RUNS
     node_count: $NODE_COUNT
     measurement_count: $MESSUREMENT_COUNT
+    shared_memory: true
     sensors: [$(printf '"%s", ' "${SENSORS[@]}" | sed 's/, $//')]
     middlewares: [$(printf '"%s", ' "${MIDDLEWARES[@]}" | sed 's/, $//')]
   software_versions:
@@ -77,12 +78,16 @@ for ((run=0; run<NUM_RUNS; run++)); do
         echo "=== [Run $RUN_NUM] Set Middleware $rmw ==="
         export RMW_IMPLEMENTATION=$rmw
 
+        export CYCLONEDDS_URI='<CycloneDDS><Domain><SharedMemory><Enable>true</Enable></SharedMemory></Domain></CycloneDDS>'
+        export ZENOH_CONFIG_OVERRIDE="transport/shared_memory/enabled=true"
+        export FASTDDS_BUILTIN_TRANSPORTS=DEFAULT
+
         # Start Zenoh Router
         if [ "$rmw" = "rmw_zenoh_cpp" ]; then
             echo "=== Starting Zenoh Router ==="
-            ros2 run rmw_zenoh_cpp rmw_zenohd &
+            ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST ros2 run rmw_zenoh_cpp rmw_zenohd --cfg "transport/shared_memory/enabled=true" &
             ZENOH_PID=$!
-            sleep 2 
+            sleep 3 
         fi
 
         sensor_seq=1
@@ -113,8 +118,9 @@ for ((run=0; run<NUM_RUNS; run++)); do
         # Stop Zenoh Router
         if [ -n "$ZENOH_PID" ]; then
             echo "=== Stopping Zenoh Router ==="
-            kill "$ZENOH_PID"
+            kill -15 "$ZENOH_PID" 2>/dev/null
             wait "$ZENOH_PID" 2>/dev/null
+            sleep 2
             unset ZENOH_PID
         fi
         
