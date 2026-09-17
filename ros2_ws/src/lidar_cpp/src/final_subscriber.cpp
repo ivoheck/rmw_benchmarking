@@ -46,10 +46,6 @@ public:
 
       if (this->count_ < measurement_count_) {
         this->measurements_.push_back(static_cast<int64_t>(latency_ns));
-        
-        double latency_ms = static_cast<double>(latency_ns) / 1'000'000.0;
-        RCLCPP_INFO(this->get_logger(), "Latenz: %.3f ms (%lu ns)", latency_ms, latency_ns);
-
         this->count_++;
       } 
 

@@ -73,21 +73,28 @@ for ((run=0; run<NUM_RUNS; run++)); do
     done
 
     for rmw in "${ROTATED_MIDDLEWARES[@]}"; do
-        source ros_source.bash
+        source /opt/ros/lyrical/setup.bash
+        source install/setup.bash
 
         echo "=== [Run $RUN_NUM] Set Middleware $rmw ==="
         export RMW_IMPLEMENTATION=$rmw
 
-        export CYCLONEDDS_URI='<CycloneDDS><Domain><SharedMemory><Enable>true</Enable></SharedMemory></Domain></CycloneDDS>'
+        export CYCLONEDDS_URI='<CycloneDDS><Domain><SharedMemory><EnableService>true</EnableService></SharedMemory></Domain></CycloneDDS>'
         export ZENOH_CONFIG_OVERRIDE="transport/shared_memory/enabled=true"
         export FASTDDS_BUILTIN_TRANSPORTS=DEFAULT
 
-        # Start Zenoh Router
+        # Start Router 
+        ROUTER_PID=""
         if [ "$rmw" = "rmw_zenoh_cpp" ]; then
             echo "=== Starting Zenoh Router ==="
             ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST ros2 run rmw_zenoh_cpp rmw_zenohd --cfg "transport/shared_memory/enabled=true" &
-            ZENOH_PID=$!
+            ROUTER_PID=$!
             sleep 3 
+        elif [ "$rmw" = "rmw_cyclonedds_cpp" ]; then
+            echo "=== Starting Iceoryx RouDi Daemon for CycloneDDS ==="
+            iox-roudi &
+            ROUTER_PID=$!
+            sleep 3
         fi
 
         sensor_seq=1
@@ -115,13 +122,13 @@ for ((run=0; run<NUM_RUNS; run++)); do
         # Stop ROS-Daemon
         ros2 daemon stop 2>/dev/null
 
-        # Stop Zenoh Router
-        if [ -n "$ZENOH_PID" ]; then
-            echo "=== Stopping Zenoh Router ==="
-            kill -15 "$ZENOH_PID" 2>/dev/null
-            wait "$ZENOH_PID" 2>/dev/null
+        # Stop Router
+        if [ -n "$ROUTER_PID" ]; then
+            echo "=== Stopping Router / Daemon (PID: $ROUTER_PID) ==="
+            kill -15 "$ROUTER_PID" 2>/dev/null
+            wait "$ROUTER_PID" 2>/dev/null
             sleep 2
-            unset ZENOH_PID
+            ROUTER_PID=""
         fi
         
         echo "=== Finished Benchmarking for $rmw ==="
