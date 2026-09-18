@@ -1,12 +1,38 @@
 #!/bin/bash
 
+cd /app/ros2_ws || exit 1
+source /opt/ros/lyrical/setup.bash
+
+RTI_ENV=$(find /opt/rti.com -name "rtisetenv*.bash" 2>/dev/null | head -n 1)
+if [ -n "$RTI_ENV" ]; then
+    source "$RTI_ENV"
+fi
+
+CONNEXT_QOS_FILE="/tmp/disable_shm_connext.xml"
+cat << 'EOF' > "$CONNEXT_QOS_FILE"
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <qos_library name="RMWConnextQosLib">
+        <qos_profile name="NoShmProfile" is_default_qos="true">
+            <participant_qos>
+                <transport_builtin>
+                    <mask>UDPv4</mask>
+                </transport_builtin>
+            </participant_qos>
+        </qos_profile>
+    </qos_library>
+</dds>
+EOF
+
+source /app/ros2_ws/install/setup.bash
+
 SESSION_DATE=$(date -u +"%Y-%m-%d_%H-%M-%SZ")
 export MEASUREMENT_OUTPUT_DIR="/messurement/$SESSION_DATE"
 
 mkdir -p "$MEASUREMENT_OUTPUT_DIR"
 echo "Save Mesurement at: $MEASUREMENT_OUTPUT_DIR"
 
-MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_fastrtps_dynamic_cpp")
+MIDDLEWARES=("rmw_zenoh_cpp" "rmw_fastrtps_cpp" "rmw_cyclonedds_cpp" "rmw_connextdds")
 SENSORS=("imu" "lidar" "camera")
 
 NUM_RUNS=25
@@ -40,7 +66,7 @@ benchmark_metadata:
     num_runs: $NUM_RUNS
     node_count: $NODE_COUNT
     measurement_count: $MESSUREMENT_COUNT
-    shared_memory: true
+    shared_memory: false
     sensors: [$(printf '"%s", ' "${SENSORS[@]}" | sed 's/, $//')]
     middlewares: [$(printf '"%s", ' "${MIDDLEWARES[@]}" | sed 's/, $//')]
   software_versions:
@@ -73,28 +99,29 @@ for ((run=0; run<NUM_RUNS; run++)); do
     done
 
     for rmw in "${ROTATED_MIDDLEWARES[@]}"; do
-        source /opt/ros/lyrical/setup.bash
-        source install/setup.bash
-
         echo "=== [Run $RUN_NUM] Set Middleware $rmw ==="
+        pkill -9 -f "ros2|imu|lidar|camera|subscriber_publisher|final_subscriber" 2>/dev/null
+        ros2 daemon stop 2>/dev/null
+        sleep 2
+
         export RMW_IMPLEMENTATION=$rmw
 
-        export CYCLONEDDS_URI='<CycloneDDS><Domain><SharedMemory><EnableService>true</EnableService></SharedMemory></Domain></CycloneDDS>'
-        export ZENOH_CONFIG_OVERRIDE="transport/shared_memory/enabled=true"
-        export FASTDDS_BUILTIN_TRANSPORTS=DEFAULT
+        export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
+        export ZENOH_CONFIG_OVERRIDE="transport/shared_memory/enabled=false"
 
-        # Start Router 
-        ROUTER_PID=""
+        if [ "$rmw" = "rmw_connextdds" ]; then
+            export NDDS_QOS_PROFILES="$CONNEXT_QOS_FILE"
+        else
+            unset NDDS_QOS_PROFILES
+        fi
+
+        # Start Zenoh Router
+        ZENOH_PID=""
         if [ "$rmw" = "rmw_zenoh_cpp" ]; then
             echo "=== Starting Zenoh Router ==="
-            ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST ros2 run rmw_zenoh_cpp rmw_zenohd --cfg "transport/shared_memory/enabled=true" &
-            ROUTER_PID=$!
+            ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST ros2 run rmw_zenoh_cpp rmw_zenohd --cfg "transport/shared_memory/enabled=false" &
+            ZENOH_PID=$!
             sleep 3 
-        elif [ "$rmw" = "rmw_cyclonedds_cpp" ]; then
-            echo "=== Starting Iceoryx RouDi Daemon for CycloneDDS ==="
-            iox-roudi &
-            ROUTER_PID=$!
-            sleep 3
         fi
 
         sensor_seq=1
@@ -113,6 +140,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
                 ros2 launch camera_cpp camera_launch.py $LAUNCH_ARGS
             fi
 
+            sleep 1
             ((sensor_seq++))
         done
 
@@ -122,13 +150,13 @@ for ((run=0; run<NUM_RUNS; run++)); do
         # Stop ROS-Daemon
         ros2 daemon stop 2>/dev/null
 
-        # Stop Router
-        if [ -n "$ROUTER_PID" ]; then
-            echo "=== Stopping Router / Daemon (PID: $ROUTER_PID) ==="
-            kill -15 "$ROUTER_PID" 2>/dev/null
-            wait "$ROUTER_PID" 2>/dev/null
+        # Stop Zenoh Router
+        if [ -n "$ZENOH_PID" ]; then
+            echo "=== Stopping Zenoh Router ==="
+            kill -15 "$ZENOH_PID" 2>/dev/null
+            wait "$ZENOH_PID" 2>/dev/null
             sleep 2
-            ROUTER_PID=""
+            unset ZENOH_PID
         fi
         
         echo "=== Finished Benchmarking for $rmw ==="

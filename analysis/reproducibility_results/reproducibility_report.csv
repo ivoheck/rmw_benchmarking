@@ -1,10 +1,10 @@
 Sensor;RMW;Runs (N);Samples;Mittelwert [ms];Latenz Kette [ms];Latenz Hop [ms];CV [%];Spanne Rel [%]
-Camera;rmw_fastrtps_dynamic_cpp;3.0;6250.0;2609108.87;417.4574;69.5762;0.72;1.31
-Camera;rmw_zenoh_cpp;3.0;6250.0;4139647.45;662.3436;110.3906;1.69;3.19
-Camera;rmw_fastrtps_cpp;3.0;6250.0;2594954.97;415.1928;69.1988;1.73;3.19
-IMU;rmw_fastrtps_cpp;3.0;6250.0;9307.32;1.4892;0.2482;0.29;0.51
-IMU;rmw_fastrtps_dynamic_cpp;3.0;6250.0;9429.67;1.5087;0.2515;1.7;3.38
-IMU;rmw_zenoh_cpp;3.0;6250.0;12916.53;2.0666;0.3444;2.11;4.06
-Lidar;rmw_zenoh_cpp;3.0;6250.0;16926.82;2.7083;0.4514;0.39;0.7
-Lidar;rmw_fastrtps_dynamic_cpp;3.0;6250.0;11280.58;1.8049;0.3008;0.45;0.81
-Lidar;rmw_fastrtps_cpp;3.0;6250.0;11214.22;1.7943;0.299;1.06;2.06
+Camera;rmw_zenoh_cpp;3.0;6250.0;4142063.14;662.7301;110.455;0.37;0.72
+Camera;rmw_fastrtps_cpp;3.0;6250.0;2615539.61;418.4863;69.7477;0.7;1.39
+Camera;rmw_fastrtps_dynamic_cpp;3.0;6250.0;2554986.84;408.7979;68.133;1.47;2.92
+IMU;rmw_fastrtps_cpp;3.0;6250.0;9728.55;1.5566;0.2594;0.71;1.4
+IMU;rmw_fastrtps_dynamic_cpp;3.0;6250.0;9606.32;1.537;0.2562;1.01;1.9
+IMU;rmw_zenoh_cpp;3.0;6250.0;13488.45;2.1582;0.3597;1.8;3.6
+Lidar;rmw_fastrtps_cpp;3.0;6250.0;11197.48;1.7916;0.2986;0.44;0.84
+Lidar;rmw_zenoh_cpp;3.0;6250.0;16900.31;2.704;0.4507;1.4;2.46
+Lidar;rmw_fastrtps_dynamic_cpp;3.0;6250.0;11279.87;1.8048;0.3008;2.21;4.38
