@@ -22,8 +22,6 @@ spec:
           volumeMounts:
             - name: measurement-data
               mountPath: "/messurement"
-            - name: dshm
-              mountPath: "/dev/shm"
           resources:
             requests:
               cpu: "3"
@@ -40,7 +38,3 @@ spec:
         - name: measurement-data
           persistentVolumeClaim:
             claimName: ros-measurement-pvc
-        - name: dshm
-          emptyDir:
-            medium: Memory
-            sizeLimit: "2Gi"
