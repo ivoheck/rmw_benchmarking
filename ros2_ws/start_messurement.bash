@@ -8,22 +8,6 @@ if [ -n "$RTI_ENV" ]; then
     source "$RTI_ENV"
 fi
 
-CONNEXT_QOS_FILE="/tmp/disable_shm_connext.xml"
-cat << 'EOF' > "$CONNEXT_QOS_FILE"
-<?xml version="1.0" encoding="UTF-8"?>
-<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <qos_library name="RMWConnextQosLib">
-        <qos_profile name="NoShmProfile" is_default_qos="true">
-            <participant_qos>
-                <transport_builtin>
-                    <mask>UDPv4</mask>
-                </transport_builtin>
-            </participant_qos>
-        </qos_profile>
-    </qos_library>
-</dds>
-EOF
-
 source /app/ros2_ws/install/setup.bash
 
 SESSION_DATE=$(date -u +"%Y-%m-%d_%H-%M-%SZ")
@@ -56,6 +40,7 @@ ROS_DISTRO_VER="${ROS_DISTRO:-unknown}"
 FAST_DDS_VER=$(get_pkg_version "ros-${ROS_DISTRO:-lyrical}-rmw-fastrtps-cpp")
 CYCLONE_DDS_VER=$(get_pkg_version "ros-${ROS_DISTRO:-lyrical}-rmw-cyclonedds-cpp")
 ZENOH_RMW_VER=$(get_pkg_version "ros-${ROS_DISTRO:-lyrical}-rmw-zenoh-cpp")
+CONNEXT_DDS_VER=$(get_pkg_version "ros-${ROS_DISTRO:-lyrical}-rmw-connextdds")
 
 cat <<EOF > "$METADATA_FILE"
 benchmark_metadata:
@@ -74,6 +59,7 @@ benchmark_metadata:
     rmw_fastrtps_cpp: "$FAST_DDS_VER"
     rmw_cyclonedds_cpp: "$CYCLONE_DDS_VER"
     rmw_zenoh_cpp: "$ZENOH_RMW_VER"
+    rmw_connextdds: "$CONNEXT_DDS_VER"
   system_info:
     hostname: "$(hostname)"
     kernel: "$(uname -r)"
@@ -106,26 +92,40 @@ for ((run=0; run<NUM_RUNS; run++)); do
 
         export RMW_IMPLEMENTATION=$rmw
 
-        export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
-        export ZENOH_CONFIG_OVERRIDE="transport/shared_memory/enabled=false"
-
-        if [ "$rmw" = "rmw_connextdds" ]; then
-            export NDDS_QOS_PROFILES="$CONNEXT_QOS_FILE"
+        # FastDDS
+        if [ "$rmw" = "rmw_fastrtps_cpp" ]; then
+            export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
         else
-            unset NDDS_QOS_PROFILES
+            unset FASTDDS_BUILTIN_TRANSPORTS
+        fi
+
+        # ContextDDS
+        if [ "$rmw" = "rmw_connextdds" ]; then
+            export RMW_CONNEXT_TRANSPORT=UDPv4
+        else
+            unset RMW_CONNEXT_TRANSPORT
         fi
 
         # Start Zenoh Router
-        ZENOH_PID=""
         if [ "$rmw" = "rmw_zenoh_cpp" ]; then
+            export ZENOH_CONFIG_OVERRIDE="transport/shared_memory/enabled=false"
             echo "=== Starting Zenoh Router ==="
             ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST ros2 run rmw_zenoh_cpp rmw_zenohd --cfg "transport/shared_memory/enabled=false" &
             ZENOH_PID=$!
             sleep 3 
+        else
+            unset ZENOH_CONFIG_OVERRIDE
         fi
 
         sensor_seq=1
         for sensor in "${ROTATED_SENSORS[@]}"; do
+
+            # Skipp ContextDDS for Camera Sensor
+            if [ "$rmw" = "rmw_connextdds" ] && [ "$sensor" = "camera" ]; then
+                echo "=== Skipping Camera for $rmw ==="
+                ((sensor_seq++))
+                continue
+            fi
             
             LAUNCH_ARGS="run_number:=$RUN_NUM node_count:=$NODE_COUNT messurement_count:=$MESSUREMENT_COUNT"
 

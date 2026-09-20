@@ -1,0 +1,706 @@
+###############################################################################
+
+         (c) Copyright, Real-Time Innovations, All rights reserved.            
+                                                                               
+                           RTI Connext DDS 7.7.0                       
+
+###############################################################################
+Save Mesurement at: /messurement/2026-09-19_12-20-21Z
+========================================
+   START RUN 1 / 25
+========================================
+=== [Run 1] Set Middleware rmw_zenoh_cpp ===
+The daemon is not running
+=== Starting Zenoh Router ===
+[2m2026-09-19T12:20:24.743768Z[0m [32m INFO[0m ThreadId(02) [2mzenoh::net::runtime[0m[2m:[0m Using ZID: aa7a58ccd6b3fed6275296dcc4b7b51e
+[2m2026-09-19T12:20:24.744925Z[0m [32m INFO[0m ThreadId(02) [2mzenoh::net::runtime::orchestrator[0m[2m:[0m Zenoh can be reached at: tcp/[fe80::50ff:ccff:fe00:447c]:7447
+[2m2026-09-19T12:20:24.744938Z[0m [32m INFO[0m ThreadId(02) [2mzenoh::net::runtime::orchestrator[0m[2m:[0m Zenoh can be reached at: tcp/10.233.103.58:7447
+Started Zenoh router with id aa7a58ccd6b3fed6275296dcc4b7b51e
+=== Start Measurement - Imu (Pos 1) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-20-27-818914-haw-ros-rwm-messurement-dgwkf-79
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [82]
+[INFO] [subscriber_publisher-2]: process started with pid [83]
+[INFO] [subscriber_publisher-3]: process started with pid [84]
+[INFO] [subscriber_publisher-4]: process started with pid [85]
+[INFO] [subscriber_publisher-5]: process started with pid [86]
+[INFO] [subscriber_publisher-6]: process started with pid [87]
+[INFO] [final_subscriber-7]: process started with pid [88]
+[final_subscriber-7] [INFO] [1789820428.621601335] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789820428.629513677] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/imu_cpp_results_rmw_zenoh_cpp_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 88]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789820428.639831416] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789820428.640644891] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [WARN] [1789820428.641368594] [rmw_zenoh_cpp]: unable to publish message since the zenoh session is closed
+[subscriber_publisher-4] [INFO] [1789820428.641454528] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789820428.642247460] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789820428.643013536] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789820428.643838469] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [WARN] [1789820428.645896319] [rmw_zenoh_cpp]: unable to publish message since the zenoh session is closed
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 86]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 83]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 85]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 82]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 84]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 87]
+=== Start Measurement - Lidar (Pos 2) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-20-30-091739-haw-ros-rwm-messurement-dgwkf-200
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [203]
+[INFO] [subscriber_publisher-2]: process started with pid [204]
+[INFO] [subscriber_publisher-3]: process started with pid [205]
+[INFO] [subscriber_publisher-4]: process started with pid [206]
+[INFO] [subscriber_publisher-5]: process started with pid [207]
+[INFO] [subscriber_publisher-6]: process started with pid [208]
+[INFO] [final_subscriber-7]: process started with pid [209]
+[final_subscriber-7] [INFO] [1789820440.217909530] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789820440.227321826] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/lidar_cpp_results_rmw_zenoh_cpp_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 209]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789820440.238641795] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789820440.239494161] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789820440.240330602] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789820440.241337058] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789820440.242116421] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789820440.242783249] [rclcpp]: signal_handler(signum=2)
+[INFO] [base_publisher-1]: process has finished cleanly [pid 203]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 205]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 208]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 207]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 206]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 204]
+=== Start Measurement - Camera (Pos 3) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-20-41-689714-haw-ros-rwm-messurement-dgwkf-329
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [332]
+[INFO] [subscriber_publisher-2]: process started with pid [333]
+[INFO] [subscriber_publisher-3]: process started with pid [334]
+[INFO] [subscriber_publisher-4]: process started with pid [335]
+[INFO] [subscriber_publisher-5]: process started with pid [336]
+[INFO] [subscriber_publisher-6]: process started with pid [337]
+[INFO] [final_subscriber-7]: process started with pid [338]
+[final_subscriber-7] [INFO] [1789820742.561777863] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789820742.570449568] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/camera_cpp_results_rmw_zenoh_cpp_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 338]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789820742.602857706] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789820742.603918799] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789820742.605042184] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789820742.606079791] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789820742.607241531] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789820742.608300701] [rclcpp]: signal_handler(signum=2)
+[INFO] [base_publisher-1]: process has finished cleanly [pid 332]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 337]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 334]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 335]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 333]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 336]
+=== Processes after launch ===
+    PID    PPID   RSS CMD
+     71       1 51436 /usr/bin/python3 /opt/ros/lyrical/bin/ros2 run rmw_zenoh_cpp rmw_zenohd --cfg transport/shared_memory/enabled=false
+     75      71 16044 /opt/ros/lyrical/lib/rmw_zenoh_cpp/rmw_zenohd --cfg transport/shared_memory/enabled=false
+    460       1  5448 head -20
+      1       0  4184 /bin/bash /app/ros2_ws/start_messurement.bash
+    459       1  4092 ps -eo pid,ppid,rss,cmd --sort=-rss
+The daemon is not running
+=== Stopping Zenoh Router ===
+[ros2run]: Received signal:  Terminated
+[2m2026-09-19T12:25:44.166300Z[0m [32m INFO[0m ThreadId(02) [2mzenoh::api::session[0m[2m:[0m close session [3mzid[0m[2m=[0maa7a58ccd6b3fed6275296dcc4b7b51e
+=== Finished Benchmarking for rmw_zenoh_cpp ===
+----------------------------------------
+=== [Run 1] Set Middleware rmw_fastrtps_cpp ===
+The daemon is not running
+=== Start Measurement - Imu (Pos 1) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-25-48-957433-haw-ros-rwm-messurement-dgwkf-470
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [473]
+[INFO] [subscriber_publisher-2]: process started with pid [474]
+[INFO] [subscriber_publisher-3]: process started with pid [475]
+[INFO] [subscriber_publisher-4]: process started with pid [476]
+[INFO] [subscriber_publisher-5]: process started with pid [477]
+[INFO] [subscriber_publisher-6]: process started with pid [478]
+[INFO] [final_subscriber-7]: process started with pid [479]
+[final_subscriber-7] [INFO] [1789820749.920809681] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789820749.923456756] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/imu_cpp_results_rmw_fastrtps_cpp_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 479]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789820750.047099371] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789820750.047988458] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789820750.048824416] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789820750.049652404] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789820750.050296238] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789820750.051208094] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 477]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 478]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 475]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 476]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 474]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 473]
+=== Start Measurement - Lidar (Pos 2) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-25-51-618804-haw-ros-rwm-messurement-dgwkf-579
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [582]
+[INFO] [subscriber_publisher-2]: process started with pid [583]
+[INFO] [subscriber_publisher-3]: process started with pid [584]
+[INFO] [subscriber_publisher-4]: process started with pid [585]
+[INFO] [subscriber_publisher-5]: process started with pid [586]
+[INFO] [subscriber_publisher-6]: process started with pid [587]
+[INFO] [final_subscriber-7]: process started with pid [588]
+[final_subscriber-7] [INFO] [1789820761.848161456] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789820761.850816077] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/lidar_cpp_results_rmw_fastrtps_cpp_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 588]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789820761.975475845] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789820761.976193211] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789820761.977005389] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789820761.977676132] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789820761.978445610] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789820761.979116956] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 587]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 586]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 582]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 585]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 583]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 584]
+=== Start Measurement - Camera (Pos 3) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-26-03-562222-haw-ros-rwm-messurement-dgwkf-688
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [691]
+[INFO] [subscriber_publisher-2]: process started with pid [692]
+[INFO] [subscriber_publisher-3]: process started with pid [693]
+[INFO] [subscriber_publisher-4]: process started with pid [694]
+[INFO] [subscriber_publisher-5]: process started with pid [695]
+[INFO] [subscriber_publisher-6]: process started with pid [696]
+[INFO] [final_subscriber-7]: process started with pid [697]
+[final_subscriber-7] [INFO] [1789821064.182478269] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789821064.189388276] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/camera_cpp_results_rmw_fastrtps_cpp_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 697]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789821064.314571145] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789821064.315252122] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789821064.316000132] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789821064.316690087] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789821064.317457427] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789821064.318138486] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 696]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 693]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 694]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 695]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 692]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 691]
+=== Processes after launch ===
+    PID    PPID   RSS CMD
+      1       0  4712 /bin/bash /app/ros2_ws/start_messurement.bash
+    798       1  4344 head -20
+    797       1  4168 ps -eo pid,ppid,rss,cmd --sort=-rss
+The daemon is not running
+=== Finished Benchmarking for rmw_fastrtps_cpp ===
+----------------------------------------
+=== [Run 1] Set Middleware rmw_cyclonedds_cpp ===
+The daemon is not running
+=== Start Measurement - Imu (Pos 1) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-31-08-712445-haw-ros-rwm-messurement-dgwkf-807
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [810]
+[INFO] [subscriber_publisher-2]: process started with pid [811]
+[INFO] [subscriber_publisher-3]: process started with pid [812]
+[INFO] [subscriber_publisher-4]: process started with pid [813]
+[INFO] [subscriber_publisher-5]: process started with pid [814]
+[INFO] [subscriber_publisher-6]: process started with pid [815]
+[INFO] [final_subscriber-7]: process started with pid [816]
+[final_subscriber-7] [INFO] [1789821069.480875881] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789821069.483072819] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/imu_cpp_results_rmw_cyclonedds_cpp_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 816]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789821069.698816044] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789821069.699444942] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789821069.700176896] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789821069.700928916] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789821069.701601655] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789821069.702353850] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 815]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 810]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 812]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 813]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 814]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 811]
+=== Start Measurement - Lidar (Pos 2) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-31-11-317944-haw-ros-rwm-messurement-dgwkf-888
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [891]
+[INFO] [subscriber_publisher-2]: process started with pid [892]
+[INFO] [subscriber_publisher-3]: process started with pid [893]
+[INFO] [subscriber_publisher-4]: process started with pid [894]
+[INFO] [subscriber_publisher-5]: process started with pid [895]
+[INFO] [subscriber_publisher-6]: process started with pid [896]
+[INFO] [final_subscriber-7]: process started with pid [897]
+[final_subscriber-7] [INFO] [1789821081.475551242] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789821081.478042974] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/lidar_cpp_results_rmw_cyclonedds_cpp_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 897]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789821081.692085225] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789821081.692969402] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789821081.693729551] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789821081.694727758] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789821081.695488100] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789821081.696248495] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 896]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 894]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 895]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 893]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 892]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 891]
+=== Start Measurement - Camera (Pos 3) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-31-23-355572-haw-ros-rwm-messurement-dgwkf-969
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [972]
+[INFO] [subscriber_publisher-2]: process started with pid [973]
+[INFO] [subscriber_publisher-3]: process started with pid [974]
+[INFO] [subscriber_publisher-4]: process started with pid [975]
+[INFO] [subscriber_publisher-5]: process started with pid [976]
+[INFO] [subscriber_publisher-6]: process started with pid [977]
+[INFO] [final_subscriber-7]: process started with pid [978]
+[final_subscriber-7] [INFO] [1789821403.914369617] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789821403.916646138] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/camera_cpp_results_rmw_cyclonedds_cpp_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 978]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789821404.147811649] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789821404.148669138] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789821404.149554896] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789821404.150305270] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789821404.151014799] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789821404.151709835] [rclcpp]: signal_handler(signum=2)
+[INFO] [base_publisher-1]: process has finished cleanly [pid 972]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 975]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 976]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 973]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 974]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 977]
+=== Processes after launch ===
+    PID    PPID   RSS CMD
+      1       0  4712 /bin/bash /app/ros2_ws/start_messurement.bash
+   1050       1  4168 ps -eo pid,ppid,rss,cmd --sort=-rss
+   1051       1  2572 head -20
+The daemon is not running
+=== Finished Benchmarking for rmw_cyclonedds_cpp ===
+----------------------------------------
+=== [Run 1] Set Middleware rmw_connextdds ===
+The daemon is not running
+=== Start Measurement - Imu (Pos 1) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-36-48-683717-haw-ros-rwm-messurement-dgwkf-1060
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [1063]
+[INFO] [subscriber_publisher-2]: process started with pid [1064]
+[INFO] [subscriber_publisher-3]: process started with pid [1065]
+[INFO] [subscriber_publisher-4]: process started with pid [1066]
+[INFO] [subscriber_publisher-5]: process started with pid [1067]
+[INFO] [subscriber_publisher-6]: process started with pid [1068]
+[INFO] [final_subscriber-7]: process started with pid [1069]
+[final_subscriber-7] [INFO] [1789821410.246660264] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789821410.250894845] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/imu_cpp_results_rmw_connextdds_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 1069]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789821411.097156043] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789821411.097801904] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789821411.098578745] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789821411.099318797] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789821411.100090682] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789821411.100788401] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 1066]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 1063]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 1064]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 1067]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 1068]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 1065]
+=== Start Measurement - Lidar (Pos 2) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-36-53-992678-haw-ros-rwm-messurement-dgwkf-1267
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [1270]
+[INFO] [subscriber_publisher-2]: process started with pid [1271]
+[INFO] [subscriber_publisher-3]: process started with pid [1272]
+[INFO] [subscriber_publisher-4]: process started with pid [1273]
+[INFO] [subscriber_publisher-5]: process started with pid [1274]
+[INFO] [subscriber_publisher-6]: process started with pid [1275]
+[INFO] [final_subscriber-7]: process started with pid [1276]
+[final_subscriber-7] [INFO] [1789821425.345699345] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789821425.349708513] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/lidar_cpp_results_rmw_connextdds_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 1276]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789821426.418731910] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789821426.420508812] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789821426.422362519] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789821426.424479640] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789821426.426306392] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789821426.428207659] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 1274]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 1273]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 1270]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 1275]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 1271]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 1272]
+=== Start Measurement - Camera (Pos 3) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-12-37-08-982208-haw-ros-rwm-messurement-dgwkf-1474
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [1477]
+[INFO] [subscriber_publisher-2]: process started with pid [1478]
+[INFO] [subscriber_publisher-3]: process started with pid [1479]
+[INFO] [subscriber_publisher-4]: process started with pid [1480]
+[INFO] [subscriber_publisher-5]: process started with pid [1481]
+[INFO] [subscriber_publisher-6]: process started with pid [1482]
+[INFO] [final_subscriber-7]: process started with pid [1483]
+[final_subscriber-7] [INFO] [1789859078.241336020] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789859078.252300256] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/camera_cpp_results_rmw_connextdds_nr_1.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 1483]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789859079.893185456] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789859079.894224396] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789859079.895029241] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789859079.895806070] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789859079.897062181] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789859079.898027761] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 1478]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 1479]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 1481]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 1482]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 1477]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 1480]
+=== Processes after launch ===
+    PID    PPID   RSS CMD
+      1       0  4712 /bin/bash /app/ros2_ws/start_messurement.bash
+   1681       1  4164 ps -eo pid,ppid,rss,cmd --sort=-rss
+   1682       1  3064 head -20
+The daemon is not running
+=== Finished Benchmarking for rmw_connextdds ===
+----------------------------------------
+========================================
+   START RUN 2 / 25
+========================================
+=== [Run 2] Set Middleware rmw_fastrtps_cpp ===
+The daemon is not running
+=== Start Measurement - Lidar (Pos 1) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-23-04-45-264572-haw-ros-rwm-messurement-dgwkf-1691
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [1694]
+[INFO] [subscriber_publisher-2]: process started with pid [1695]
+[INFO] [subscriber_publisher-3]: process started with pid [1696]
+[INFO] [subscriber_publisher-4]: process started with pid [1697]
+[INFO] [subscriber_publisher-5]: process started with pid [1698]
+[INFO] [subscriber_publisher-6]: process started with pid [1699]
+[INFO] [final_subscriber-7]: process started with pid [1700]
+[final_subscriber-7] [INFO] [1789859095.518043258] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789859095.521037388] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/lidar_cpp_results_rmw_fastrtps_cpp_nr_2.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 1700]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789859095.640832278] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789859095.641568878] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789859095.642290891] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789859095.642971950] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789859095.643787858] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789859095.644652775] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 1699]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 1698]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 1697]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 1695]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 1694]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 1696]
+=== Start Measurement - Camera (Pos 2) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-23-04-57-193807-haw-ros-rwm-messurement-dgwkf-1800
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [1803]
+[INFO] [subscriber_publisher-2]: process started with pid [1804]
+[INFO] [subscriber_publisher-3]: process started with pid [1805]
+[INFO] [subscriber_publisher-4]: process started with pid [1806]
+[INFO] [subscriber_publisher-5]: process started with pid [1807]
+[INFO] [subscriber_publisher-6]: process started with pid [1808]
+[INFO] [final_subscriber-7]: process started with pid [1809]
+[final_subscriber-7] [INFO] [1789859397.768768345] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789859397.776801531] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/camera_cpp_results_rmw_fastrtps_cpp_nr_2.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 1809]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789859397.903136809] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789859397.903918970] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789859397.904673580] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789859397.905406519] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789859397.906141318] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789859397.906862497] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 1806]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 1804]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 1807]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 1805]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 1808]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 1803]
+=== Start Measurement - Imu (Pos 3) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-23-09-59-507581-haw-ros-rwm-messurement-dgwkf-1909
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [1912]
+[INFO] [subscriber_publisher-2]: process started with pid [1913]
+[INFO] [subscriber_publisher-3]: process started with pid [1914]
+[INFO] [subscriber_publisher-4]: process started with pid [1915]
+[INFO] [subscriber_publisher-5]: process started with pid [1916]
+[INFO] [subscriber_publisher-6]: process started with pid [1917]
+[INFO] [final_subscriber-7]: process started with pid [1918]
+[final_subscriber-7] [INFO] [1789859400.403473675] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789859400.405516503] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/imu_cpp_results_rmw_fastrtps_cpp_nr_2.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 1918]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789859400.523482757] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789859400.524230880] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789859400.524945418] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789859400.525649099] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789859400.526413891] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789859400.527207428] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 1917]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 1916]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 1912]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 1914]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 1915]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 1913]
+=== Processes after launch ===
+    PID    PPID   RSS CMD
+      1       0  4712 /bin/bash /app/ros2_ws/start_messurement.bash
+   2018       1  4088 ps -eo pid,ppid,rss,cmd --sort=-rss
+   2019       1  2196 head -20
+The daemon is not running
+=== Finished Benchmarking for rmw_fastrtps_cpp ===
+----------------------------------------
+=== [Run 2] Set Middleware rmw_cyclonedds_cpp ===
+The daemon is not running
+=== Start Measurement - Lidar (Pos 1) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-23-10-04-916020-haw-ros-rwm-messurement-dgwkf-2028
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [2031]
+[INFO] [subscriber_publisher-2]: process started with pid [2032]
+[INFO] [subscriber_publisher-3]: process started with pid [2033]
+[INFO] [subscriber_publisher-4]: process started with pid [2034]
+[INFO] [subscriber_publisher-5]: process started with pid [2035]
+[INFO] [subscriber_publisher-6]: process started with pid [2036]
+[INFO] [final_subscriber-7]: process started with pid [2037]
+[final_subscriber-7] [INFO] [1789859415.075550846] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789859415.077830236] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/lidar_cpp_results_rmw_cyclonedds_cpp_nr_2.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 2037]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789859415.294607492] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789859415.295436133] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789859415.296213576] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789859415.296974738] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789859415.297727196] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789859415.298594569] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 2036]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 2035]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 2033]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 2034]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 2031]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 2032]
+=== Start Measurement - Camera (Pos 2) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-23-10-16-956738-haw-ros-rwm-messurement-dgwkf-2109
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [2112]
+[INFO] [subscriber_publisher-2]: process started with pid [2113]
+[INFO] [subscriber_publisher-3]: process started with pid [2114]
+[INFO] [subscriber_publisher-4]: process started with pid [2115]
+[INFO] [subscriber_publisher-5]: process started with pid [2116]
+[INFO] [subscriber_publisher-6]: process started with pid [2117]
+[INFO] [final_subscriber-7]: process started with pid [2118]
+[final_subscriber-7] [INFO] [1789859726.488701392] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789859726.491055392] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/camera_cpp_results_rmw_cyclonedds_cpp_nr_2.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 2118]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789859726.721936726] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789859726.722631939] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789859726.723404042] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789859726.724184587] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789859726.725005050] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789859726.725800060] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 2117]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 2112]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 2115]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 2116]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 2114]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 2113]
+=== Start Measurement - Imu (Pos 3) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-23-15-28-418906-haw-ros-rwm-messurement-dgwkf-2190
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [2193]
+[INFO] [subscriber_publisher-2]: process started with pid [2194]
+[INFO] [subscriber_publisher-3]: process started with pid [2195]
+[INFO] [subscriber_publisher-4]: process started with pid [2196]
+[INFO] [subscriber_publisher-5]: process started with pid [2197]
+[INFO] [subscriber_publisher-6]: process started with pid [2198]
+[INFO] [final_subscriber-7]: process started with pid [2199]
+[final_subscriber-7] [INFO] [1789859729.182713450] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789859729.184846471] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/imu_cpp_results_rmw_cyclonedds_cpp_nr_2.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 2199]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789859729.398072929] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789859729.398645397] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789859729.399237825] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789859729.399797000] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789859729.400404286] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789859729.401019285] [rclcpp]: signal_handler(signum=2)
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 2198]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 2196]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 2194]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 2195]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 2197]
+[INFO] [base_publisher-1]: process has finished cleanly [pid 2193]
+=== Processes after launch ===
+    PID    PPID   RSS CMD
+   2272       1  5464 head -20
+      1       0  4712 /bin/bash /app/ros2_ws/start_messurement.bash
+   2271       1  4168 ps -eo pid,ppid,rss,cmd --sort=-rss
+The daemon is not running
+=== Finished Benchmarking for rmw_cyclonedds_cpp ===
+----------------------------------------
+=== [Run 2] Set Middleware rmw_connextdds ===
+The daemon is not running
+=== Start Measurement - Lidar (Pos 1) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-23-15-33-781088-haw-ros-rwm-messurement-dgwkf-2281
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [2284]
+[INFO] [subscriber_publisher-2]: process started with pid [2285]
+[INFO] [subscriber_publisher-3]: process started with pid [2286]
+[INFO] [subscriber_publisher-4]: process started with pid [2287]
+[INFO] [subscriber_publisher-5]: process started with pid [2288]
+[INFO] [subscriber_publisher-6]: process started with pid [2289]
+[INFO] [final_subscriber-7]: process started with pid [2290]
+[final_subscriber-7] [INFO] [1789859744.927591990] [final_subscriber]: Stop messurment
+[final_subscriber-7] [INFO] [1789859744.931431125] [final_subscriber]: Saved data at: /messurement/2026-09-19_12-20-21Z/lidar_cpp_results_rmw_connextdds_nr_2.txt
+[INFO] [final_subscriber-7]: process has finished cleanly [pid 2290]
+[INFO] [launch]: process[final_subscriber-7] was required: shutting down launched system
+[INFO] [subscriber_publisher-6]: sending signal 'SIGINT' to process[subscriber_publisher-6]
+[INFO] [subscriber_publisher-5]: sending signal 'SIGINT' to process[subscriber_publisher-5]
+[INFO] [subscriber_publisher-4]: sending signal 'SIGINT' to process[subscriber_publisher-4]
+[INFO] [subscriber_publisher-3]: sending signal 'SIGINT' to process[subscriber_publisher-3]
+[INFO] [subscriber_publisher-2]: sending signal 'SIGINT' to process[subscriber_publisher-2]
+[INFO] [base_publisher-1]: sending signal 'SIGINT' to process[base_publisher-1]
+[subscriber_publisher-6] [INFO] [1789859746.203453385] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-5] [INFO] [1789859746.205088147] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-4] [INFO] [1789859746.206752657] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-3] [INFO] [1789859746.208462932] [rclcpp]: signal_handler(signum=2)
+[subscriber_publisher-2] [INFO] [1789859746.210251707] [rclcpp]: signal_handler(signum=2)
+[base_publisher-1] [INFO] [1789859746.212581330] [rclcpp]: signal_handler(signum=2)
+[INFO] [base_publisher-1]: process has finished cleanly [pid 2284]
+[INFO] [subscriber_publisher-4]: process has finished cleanly [pid 2287]
+[INFO] [subscriber_publisher-6]: process has finished cleanly [pid 2289]
+[INFO] [subscriber_publisher-5]: process has finished cleanly [pid 2288]
+[INFO] [subscriber_publisher-3]: process has finished cleanly [pid 2286]
+[INFO] [subscriber_publisher-2]: process has finished cleanly [pid 2285]
+=== Start Measurement - Camera (Pos 2) ===
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-09-19-23-15-48-727144-haw-ros-rwm-messurement-dgwkf-2488
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [base_publisher-1]: process started with pid [2491]
+[INFO] [subscriber_publisher-2]: process started with pid [2492]
+[INFO] [subscriber_publisher-3]: process started with pid [2493]
+[INFO] [subscriber_publisher-4]: process started with pid [2494]
+[INFO] [subscriber_publisher-5]: process started with pid [2495]
+[INFO] [subscriber_publisher-6]: process started with pid [2496]
+[INFO] [final_subscriber-7]: process started with pid [2497]
