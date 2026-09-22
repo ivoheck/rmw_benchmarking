@@ -89,7 +89,6 @@ sns.set_theme(style="whitegrid")
 unique_sensors = sorted(df_samples["Sensor"].unique())
 num_sensors = len(unique_sensors)
 
-# Dynamische Bildgröße: ca. 6.5 Zoll Breite pro Sensor
 fig, axes = plt.subplots(1, num_sensors, figsize=(6.5 * num_sensors, 6.0), squeeze=False)
 axes = axes.flatten()
 
@@ -100,9 +99,9 @@ for idx, sensor_type in enumerate(unique_sensors):
     raw_max = df_sensor["Latenz (µs)"].max()
     
     # Ausreißer-Bereinigung je RMW
-    q25 = df_sensor.groupby("RMW Implementation")["Latenz (µs)"].transform(lambda x: x.quantile(0.25))
-    q75 = df_sensor.groupby("RMW Implementation")["Latenz (µs)"].transform(lambda x: x.quantile(0.75))
-    cutoff = q75 + (1.5 * (q75 - q25))
+    q25_series = df_sensor.groupby("RMW Implementation")["Latenz (µs)"].transform(lambda x: x.quantile(0.25))
+    q75_series = df_sensor.groupby("RMW Implementation")["Latenz (µs)"].transform(lambda x: x.quantile(0.75))
+    cutoff = q75_series + (1.5 * (q75_series - q25_series))
     
     df_cleaned = df_sensor[df_sensor["Latenz (µs)"] <= cutoff].copy()
     
@@ -143,15 +142,37 @@ for idx, sensor_type in enumerate(unique_sensors):
         ax=ax
     )
     
-    # Eigene dynamische Y-Achsenskalierung pro Sensor-Plot
-    padding = (cleaned_max - cleaned_min) * 0.1
-    ax.set_ylim(bottom=max(0, cleaned_min - padding), top=cleaned_max + padding)
+    # --- NEU: Streuung (IQR) für jede RMW berechnen und im Diagramm anzeigen ---
+    for x_pos, rmw in enumerate(rmw_order):
+        rmw_data = df_cleaned[df_cleaned["RMW Implementation"] == rmw]["Latenz (µs)"]
+        
+        q25 = rmw_data.quantile(0.25)
+        q75 = rmw_data.quantile(0.75)
+        iqr = q75 - q25
+        whisker_top = rmw_data[rmw_data <= q75 + 1.5 * iqr].max()
+        
+        # Text über dem obersten Whisker platzieren
+        ax.text(
+            x=x_pos,
+            y=whisker_top + (cleaned_max - cleaned_min) * 0.03,
+            s=f"IQR:\n{iqr:.1f} µs",
+            ha='center',
+            va='bottom',
+            fontsize=8.5,
+            fontweight='bold',
+            color='#333333'
+        )
+
+    # Dynamische Y-Achsenskalierung mit etwas mehr Platz oben für die Beschriftung
+    padding_bottom = (cleaned_max - cleaned_min) * 0.08
+    padding_top = (cleaned_max - cleaned_min) * 0.18  # Erhöht für Text-Space
+    ax.set_ylim(bottom=max(0, cleaned_min - padding_bottom), top=cleaned_max + padding_top)
     
     ax.set_title(f"{sensor_type}", fontsize=13, fontweight='bold', pad=12)
     ax.set_xlabel("Middleware-Implementierung (RMW)", fontsize=10, fontweight='bold', labelpad=10)
     ax.set_ylabel("Latenz [µs]", fontsize=10, fontweight='bold', labelpad=10)
     ax.tick_params(axis='x', rotation=20)
-
+    
 plt.suptitle("ROS 2 Latenzverteilung nach Sensortyp", fontsize=15, fontweight='bold', y=1.02)
 plt.tight_layout()
 

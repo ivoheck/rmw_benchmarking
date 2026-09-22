@@ -1,12 +1,12 @@
-Sensor;RMW;Runs (N);Samples;Mittelwert [ms];Latenz Kette [ms];Latenz Hop [ms];CV [%];Spanne Rel [%]
-Camera;rmw_fastrtps_cpp;3.0;6250.0;2681244.85;428.9992;71.4999;0.08;0.15
-Camera;rmw_zenoh_cpp;3.0;6250.0;4123388.59;659.7422;109.957;0.24;0.42
-Camera;rmw_cyclonedds_cpp;3.0;6250.0;2611135.89;417.7817;69.6303;1.73;3.46
-IMU;rmw_cyclonedds_cpp;3.0;6250.0;7782.67;1.2452;0.2075;0.94;1.88
-IMU;rmw_zenoh_cpp;3.0;6250.0;13450.8;2.1521;0.3587;1.51;2.92
-IMU;rmw_fastrtps_cpp;3.0;6250.0;10546.44;1.6874;0.2812;1.96;3.73
-IMU;rmw_connextdds;3.0;6250.0;10242.62;1.6388;0.2731;2.39;4.49
-Lidar;rmw_zenoh_cpp;3.0;6250.0;16619.17;2.6591;0.4432;0.03;0.07
-Lidar;rmw_connextdds;3.0;6250.0;12077.2;1.9324;0.3221;0.34;0.68
-Lidar;rmw_cyclonedds_cpp;3.0;6250.0;10490.13;1.6784;0.2797;0.93;1.81
-Lidar;rmw_fastrtps_cpp;3.0;6250.0;12425.47;1.9881;0.3313;2.33;4.54
+Sensor;RMW;Samples;Mittelwert [ms];Latenz Kette [ms];Latenz Hop [ms];CV [%];Spanne Rel [%]
+Camera;rmw_cyclonedds_cpp;6250.0;2611135,89;417,7817;69,6303;1,73;3,46
+Camera;rmw_fastrtps_cpp;6250.0;2681244,85;428,9992;71,4999;0,08;0,15
+Camera;rmw_zenoh_cpp;6250.0;4123388,59;659,7422;109,9570;0,24;0,42
+IMU;rmw_cyclonedds_cpp;6250.0;7782,67;1,2452;0,2075;0,94;1,88
+IMU;rmw_fastrtps_cpp;6250.0;10546,44;1,6874;0,2812;1,96;3,73
+IMU;rmw_connextdds;6250.0;10242,62;1,6388;0,2731;2,39;4,49
+IMU;rmw_zenoh_cpp;6250.0;13450,80;2,1521;0,3587;1,51;2,92
+Lidar;rmw_cyclonedds_cpp;6250.0;10490,13;1,6784;0,2797;0,93;1,81
+Lidar;rmw_fastrtps_cpp;6250.0;12425,47;1,9881;0,3313;2,33;4,54
+Lidar;rmw_connextdds;6250.0;12077,20;1,9324;0,3221;0,34;0,68
+Lidar;rmw_zenoh_cpp;6250.0;16619,17;2,6591;0,4432;0,03;0,07
