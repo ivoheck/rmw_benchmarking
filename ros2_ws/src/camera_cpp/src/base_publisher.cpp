@@ -17,7 +17,7 @@ public:
     std::string output_topic = this->get_parameter("output_topic").as_string();
 
     rclcpp::QoS camera_image_qos = rclcpp::SensorDataQoS();
-    camera_image_qos.keep_last(10).reliable();
+    camera_image_qos.keep_last(1).reliable();
 
     publisher_ = this->create_publisher<sensor_msgs::msg::Image>(output_topic, camera_image_qos);
     

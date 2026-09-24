@@ -62,7 +62,7 @@ public:
     };
 
     rclcpp::QoS camera_image_qos = rclcpp::SensorDataQoS();
-    camera_image_qos.keep_last(10).reliable();
+    camera_image_qos.keep_last(1).reliable();
 
     subscription_ = this->create_subscription<sensor_msgs::msg::Image>(
       input_topic, 
