@@ -14,7 +14,10 @@ public:
   BasePublisher()
   : Node("base_publisher")
   {
-    publisher_ = this->create_publisher<sensor_msgs::msg::Imu>("/imu", rclcpp::SensorDataQoS());
+    this->declare_parameter<std::string>("output_topic", "");
+    std::string output_topic = this->get_parameter("output_topic").as_string();
+
+    publisher_ = this->create_publisher<sensor_msgs::msg::Imu>(output_topic, rclcpp::SensorDataQoS());
     auto period = std::chrono::duration<double>(1.0 / 500.0);
 
     prepare_imu_msg();
@@ -59,7 +62,6 @@ private:
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr publisher_;
   sensor_msgs::msg::Imu msg_;
-
 };
 
 int main(int argc, char * argv[])

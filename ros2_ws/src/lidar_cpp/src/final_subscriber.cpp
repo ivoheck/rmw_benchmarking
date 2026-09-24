@@ -7,6 +7,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
+#include "rmw/rmw.h"
 
 class FinalSubscriber : public rclcpp::Node
 {
@@ -14,6 +15,9 @@ public:
   FinalSubscriber()
   : Node("final_subscriber"), count_(0), is_done_(false)
   {
+    this->declare_parameter<std::string>("input_topic", "");
+    std::string input_topic = this->get_parameter("input_topic").as_string();
+
     this->declare_parameter<int64_t>("messurement_count", 0);
     this->measurement_count_ = static_cast<size_t>(this->get_parameter("messurement_count").as_int());
 
@@ -61,7 +65,7 @@ public:
     };
 
     subscription_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
-      "/scan_final", 
+      input_topic, 
       rclcpp::SensorDataQoS(), 
       listener_callback
     );

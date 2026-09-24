@@ -106,14 +106,11 @@ for ((run=0; run<NUM_RUNS; run++)); do
             unset RMW_CONNEXT_TRANSPORT
         fi
 
-        # Start Zenoh Router
         if [ "$rmw" = "rmw_zenoh_cpp" ]; then
-            export ZENOH_CONFIG_OVERRIDE="transport/shared_memory/enabled=false"
-            echo "=== Starting Zenoh Router ==="
-            ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST ros2 run rmw_zenoh_cpp rmw_zenohd --cfg "transport/shared_memory/enabled=false" &
-            ZENOH_PID=$!
-            sleep 3 
+            export ZENOH_ROUTER_CHECK_ATTEMPTS=-1
+            export ZENOH_CONFIG_OVERRIDE='scouting/multicast/enabled=true;transport/shared_memory/enabled=false'
         else
+            unset ZENOH_ROUTER_CHECK_ATTEMPTS
             unset ZENOH_CONFIG_OVERRIDE
         fi
 
@@ -149,15 +146,6 @@ for ((run=0; run<NUM_RUNS; run++)); do
         
         # Stop ROS-Daemon
         ros2 daemon stop 2>/dev/null
-
-        # Stop Zenoh Router
-        if [ -n "$ZENOH_PID" ]; then
-            echo "=== Stopping Zenoh Router ==="
-            kill -15 "$ZENOH_PID" 2>/dev/null
-            wait "$ZENOH_PID" 2>/dev/null
-            sleep 2
-            unset ZENOH_PID
-        fi
         
         echo "=== Finished Benchmarking for $rmw ==="
         echo "----------------------------------------"

@@ -1,12 +1,12 @@
 #include <chrono>
 #include <memory>
-#include <cmath>
 #include <vector>
 #include <fstream> 
 #include <cstdlib>
 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/image.hpp"
+#include "rmw/rmw.h"
 
 class FinalSubscriber : public rclcpp::Node
 {
@@ -14,6 +14,9 @@ public:
   FinalSubscriber()
   : Node("final_subscriber"), count_(0), is_done_(false)
   {
+    this->declare_parameter<std::string>("input_topic", "camera_final");
+    std::string input_topic = this->get_parameter("input_topic").as_string();
+
     this->declare_parameter<int64_t>("messurement_count", 0);
     this->measurement_count_ = static_cast<size_t>(this->get_parameter("messurement_count").as_int());
 
@@ -40,34 +43,29 @@ public:
       }
 
       uint64_t send_ns = static_cast<uint64_t>(msg->header.stamp.sec) * 1'000'000'000ULL 
-                 + msg->header.stamp.nanosec;
+                        + msg->header.stamp.nanosec;
 
       uint64_t latency_ns = receive_ns - send_ns;
 
       if (this->count_ < measurement_count_) {
         this->measurements_.push_back(static_cast<int64_t>(latency_ns));
+        RCLCPP_INFO(this->get_logger(), "Count: %zu | Latency: %ld ns", this->count_, static_cast<int64_t>(latency_ns));
         this->count_++;
       } 
       
       if (this->count_ >= measurement_count_) {
         RCLCPP_INFO(this->get_logger(), "Stop messurment");
-
         this->is_done_ = true;
-
         this->subscription_.reset();
-
         rclcpp::shutdown();
       }
     };
 
     rclcpp::QoS camera_image_qos = rclcpp::SensorDataQoS();
-
-    camera_image_qos
-      .keep_last(1)  
-      .reliable();
+    camera_image_qos.keep_last(10).reliable();
 
     subscription_ = this->create_subscription<sensor_msgs::msg::Image>(
-      "/camera_final", 
+      input_topic, 
       camera_image_qos, 
       listener_callback
     );
@@ -83,7 +81,7 @@ public:
       file.close();
       RCLCPP_INFO(this->get_logger(), "Saved data at: %s", file_path_.c_str());
     } else {
-      RCLCPP_ERROR(this->get_logger(), "Error with saving data at: %s", file_path_.c_str());
+      RCLCPP_ERROR(this->get_logger(), "Error saving data at: %s", file_path_.c_str());
     }
   }
 
@@ -102,9 +100,7 @@ private:
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  
   auto node = std::make_shared<FinalSubscriber>();
-  
   rclcpp::spin(node);
 
   if (node->has_data()) {

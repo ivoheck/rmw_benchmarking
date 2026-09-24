@@ -14,7 +14,10 @@ public:
   BasePublisher()
   : Node("base_publisher")
   {
-    publisher_ = this->create_publisher<sensor_msgs::msg::LaserScan>("/scan", rclcpp::SensorDataQoS());
+    this->declare_parameter<std::string>("output_topic", "");
+    std::string output_topic = this->get_parameter("output_topic").as_string();
+
+    publisher_ = this->create_publisher<sensor_msgs::msg::LaserScan>(output_topic, rclcpp::SensorDataQoS());
     auto period = std::chrono::duration<double>(1.0 / 30.0);
 
     prepare_lidar_msg();
@@ -24,26 +27,27 @@ public:
 
 private:
   void prepare_lidar_msg()
-    {
-      msg_.header.frame_id = "laser_frame";
+  {
+    msg_.header.frame_id = "laser_frame";
 
-      msg_.angle_min = -3.0 * M_PI / 4.0;      
-      msg_.angle_max = 3.0 * M_PI / 4.0;       
+    msg_.angle_min = -3.0 * M_PI / 4.0;      
+    msg_.angle_max = 3.0 * M_PI / 4.0;       
 
-      msg_.angle_increment = (0.25 * M_PI) / 180.0; 
+    msg_.angle_increment = (0.25 * M_PI) / 180.0; 
 
-      msg_.time_increment = 0.030f / 1081.0f;
-      
-      msg_.scan_time = 1.0f / 30.0f;
-      
-      msg_.range_min = 0.10f;
-      msg_.range_max = 30.0f;
-      
-      size_t num_readings = 1081;
-      
-      msg_.ranges = std::vector<float>(num_readings, 3.5f);
-      msg_.intensities = std::vector<float>(num_readings, 1.0f);
-    }
+    msg_.time_increment = 0.030f / 1081.0f;
+    
+    msg_.scan_time = 1.0f / 30.0f;
+    
+    msg_.range_min = 0.10f;
+    msg_.range_max = 30.0f;
+    
+    size_t num_readings = 1081;
+    
+    msg_.ranges = std::vector<float>(num_readings, 3.5f);
+    msg_.intensities = std::vector<float>(num_readings, 1.0f);
+  }
+
   void publish_scan()
   {
     auto now_steady = std::chrono::steady_clock::now();
@@ -60,7 +64,6 @@ private:
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr publisher_;
   sensor_msgs::msg::LaserScan msg_;
-
 };
 
 int main(int argc, char * argv[])

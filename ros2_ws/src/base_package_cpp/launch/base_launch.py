@@ -15,12 +15,15 @@ def evaluate_launch(context):
             package=package_name,
             executable='base_publisher',
             name='base_publisher',
+            parameters=[{
+                'output_topic': topic_name,
+            }]
         )
     ]
 
     for i in range(node_count):
         input_topic = topic_name if i == 0 else f'{topic_name}_{i}'
-        output_topic = f'{topic_name}_{i+1}' if i < (node_count -1) else f'{topic_name}_final'
+        output_topic = f'{topic_name}_{i+1}'
         
         nodes.append(
             Node(
@@ -34,15 +37,18 @@ def evaluate_launch(context):
             )
         )
 
+    final_input_topic = topic_name if node_count == 0 else f'{topic_name}_{node_count}'
+
     nodes.append(
         Node(
             package=package_name,
             executable='final_subscriber',
             name='final_subscriber',
             parameters=[{
-                    'messurement_count': messurement_count,
-                    'run_number': run_number,
-                }],
+                'input_topic': final_input_topic,
+                'messurement_count': messurement_count,
+                'run_number': run_number,
+            }],
             on_exit=Shutdown()
         )
     )

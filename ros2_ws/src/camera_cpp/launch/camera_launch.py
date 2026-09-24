@@ -1,8 +1,7 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
@@ -21,8 +20,8 @@ def generate_launch_description():
         default_value='-1'
     )
 
-    messurement_count = DeclareLaunchArgument(
-        'run_number',
+    declare_messurement_count = DeclareLaunchArgument(
+        'messurement_count',
         default_value='-1'
     )
 
@@ -39,11 +38,11 @@ def generate_launch_description():
             'node_count': node_count_conf,
             'messurement_count': messurement_count_conf,
         }.items()
-    )#
+    )
 
     return LaunchDescription([
-        included_launch,
         declare_run_number,
         declare_node_count,
-        messurement_count
-        ])
+        declare_messurement_count,
+        included_launch
+    ])
