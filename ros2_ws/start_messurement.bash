@@ -106,6 +106,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
             unset RMW_CONNEXT_TRANSPORT
         fi
 
+        # Zenoh
         if [ "$rmw" = "rmw_zenoh_cpp" ]; then
             export ZENOH_ROUTER_CHECK_ATTEMPTS=-1
             export ZENOH_CONFIG_OVERRIDE='scouting/multicast/enabled=true;transport/shared_memory/enabled=false'
