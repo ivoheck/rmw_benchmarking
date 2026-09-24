@@ -5,6 +5,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+plt.rcParams['svg.fonttype'] = 'none'  # Erhält Schriften als Vektortext
+plt.rcParams['path.simplify'] = False
+
 # 1. Pfade definieren
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -172,15 +175,13 @@ for idx, sensor_type in enumerate(unique_sensors):
     ax.set_xlabel("Middleware-Implementierung (RMW)", fontsize=10, fontweight='bold', labelpad=10)
     ax.set_ylabel("Latenz [µs]", fontsize=10, fontweight='bold', labelpad=10)
     ax.tick_params(axis='x', rotation=20)
-    
+
 plt.suptitle("ROS 2 Latenzverteilung nach Sensortyp", fontsize=15, fontweight='bold', y=1.02)
 plt.tight_layout()
 
-# 5. Gemeinsames Bild speichern
-output_filename = "boxplots_all_sensors_combined.png"
+# 5. Gemeinsames Bild als Vektorgrafik speichern
+output_filename = "boxplots_all_sensors_combined.pdf"  # .pdf statt .svg
 save_path = os.path.join(image_output_dir, output_filename)
 
-plt.savefig(save_path, dpi=300, bbox_inches='tight')
+plt.savefig(save_path, format="pdf", bbox_inches='tight') 
 plt.close(fig)
-
-print(f"\nKombiniertes Diagramm erfolgreich gespeichert: {save_path}")

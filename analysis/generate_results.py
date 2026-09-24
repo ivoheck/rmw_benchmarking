@@ -5,6 +5,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+plt.rcParams['svg.fonttype'] = 'none'  # Erhält Schriften als Vektortext
+plt.rcParams['path.simplify'] = False
+
 # 1. Pfade definieren
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -173,10 +176,8 @@ plt.suptitle("ROS 2 Performance-Benchmark nach Sensortyp", fontsize=15, fontweig
 plt.tight_layout()
 
 # 6. Kombiniertes Bild speichern
-output_filename = "benchmarks_all_sensors_combined.png"
+output_filename = "benchmarks_all_sensors_combined.pdf"
 save_path = os.path.join(image_output_dir, output_filename)
 
-plt.savefig(save_path, dpi=300, bbox_inches='tight')
+plt.savefig(save_path, format="pdf", bbox_inches='tight') 
 plt.close(fig)
-
-print(f"\nKombiniertes Benchmark-Diagramm erfolgreich gespeichert: {save_path}")

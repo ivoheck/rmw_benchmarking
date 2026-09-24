@@ -37,11 +37,14 @@ for folder_path in sorted(subfolders):
     if not match:
       continue
 
-    sensor_type = (
-        match.group(1).upper()
-        if match.group(1).lower() == "imu"
-        else match.group(1).capitalize()
-    )
+    raw_sensor = match.group(1).lower()
+    if raw_sensor == "imu":
+      sensor_type = "IMU"
+    elif raw_sensor == "lidar":
+      sensor_type = "LiDAR"
+    else:
+      sensor_type = match.group(1).capitalize()
+      
     rmw_name = match.group(2)
 
     total_nanoseconds = 0
@@ -130,7 +133,7 @@ reproducibility_df = (
 rmw_order = [
     "rmw_cyclonedds_cpp",
     "rmw_fastrtps_cpp",
-    "rmw_connextdds",
+    "rmw_connextdds_cpp",
     "rmw_zenoh_cpp",
 ]
 
