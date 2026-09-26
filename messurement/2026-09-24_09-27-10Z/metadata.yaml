@@ -1,0 +1,23 @@
+benchmark_metadata:
+  session_name: "2026-09-24_09-27-10Z"
+  start_time: "2026-09-24T09:27:10Z"
+  image_tag: "bench-run-v14"
+  parameters:
+    num_runs: 30
+    node_count: 5
+    measurement_count: 300
+    shared_memory: false
+    sensors: ["imu", "lidar", "camera"]
+    middlewares: ["rmw_zenoh_cpp", "rmw_fastrtps_cpp", "rmw_cyclonedds_cpp", "rmw_connextdds"]
+  software_versions:
+    ros_distro: "lyrical"
+    rmw_fastrtps_cpp: "9.4.10-1resolute.20260915.053043"
+    rmw_cyclonedds_cpp: "4.1.5-1resolute.20260915.051853"
+    rmw_zenoh_cpp: "0.10.6-1resolute.20260915.025944"
+    rmw_connextdds: "1.2.8-1resolute.20260915.053056"
+  system_info:
+    hostname: "haw-ros-rwm-messurement-5l9sc"
+    kernel: "6.18.9-talos"
+  end_time: "2026-09-24 17:37:45"
+  total_duration_seconds: 29435
+  status: "COMPLETED"
