@@ -3,16 +3,21 @@
   scope: "parent",
   table(
     columns: (auto, auto, auto, 1fr, 1fr, 1fr, 1fr, 1fr),
-    stroke: (x, y) => if y == 0 { (top: 1pt + black, bottom: 0.5pt + black) } else if y == 7 { (bottom: 1pt + black) } else { none },
+    stroke: (x, y) => if y == 0 { (top: 1pt + black, bottom: 0.5pt + black) } else if y == 12 { (bottom: 1pt + black) } else { none },
     table.header(
       [*Sensor*], [*RMW*], [*Samples*], [*Mittelwert [ms]*], [*Kette [ms]*], [*Hop [ms]*], [*CV [%]*], [*Spanne [%]*]
     ),
-    [Camera], `rmw_fastrtps_cpp`, [10], [14732,03], [1473,2028], [245,5338], [0,00\%], [0,00\%],
-    [Camera], `rmw_zenoh_cpp`, [10], [3440,72], [344,0716], [57,3453], [0,00\%], [0,00\%],
-    [IMU], `rmw_fastrtps_cpp`, [10], [40,36], [4,0363], [0,6727], [0,00\%], [0,00\%],
-    [IMU], `rmw_zenoh_cpp`, [10], [35,79], [3,5793], [0,5966], [0,00\%], [0,00\%],
-    [LiDAR], `rmw_fastrtps_cpp`, [10], [63,53], [6,3530], [1,0588], [0,00\%], [0,00\%],
-    [LiDAR], `rmw_zenoh_cpp`, [10], [27,37], [2,7372], [0,4562], [0,00\%], [0,00\%],
+    [Camera], `rmw_cyclonedds_cpp`, [7500], [737387,77], [98,3184], [16,3864], [0,31\%], [0,62\%],
+    [Camera], `rmw_fastrtps_cpp`, [7500], [531709,45], [70,8946], [11,8158], [0,18\%], [0,32\%],
+    [Camera], `rmw_zenoh_cpp`, [7500], [755811,30], [100,7748], [16,7958], [0,57\%], [1,13\%],
+    [IMU], `rmw_cyclonedds_cpp`, [7500], [9241,77], [1,2322], [0,2054], [1,10\%], [2,09\%],
+    [IMU], `rmw_fastrtps_cpp`, [7500], [12631,34], [1,6842], [0,2807], [1,05\%], [2,10\%],
+    [IMU], `rmw_zenoh_cpp`, [7500], [17006,00], [2,2675], [0,3779], [0,58\%], [1,15\%],
+    [IMU], `rmw_connextdds`, [7500], [12092,37], [1,6123], [0,2687], [0,96\%], [1,91\%],
+    [LiDAR], `rmw_cyclonedds_cpp`, [7500], [12459,05], [1,6612], [0,2769], [0,66\%], [1,24\%],
+    [LiDAR], `rmw_fastrtps_cpp`, [7500], [14926,53], [1,9902], [0,3317], [2,00\%], [3,63\%],
+    [LiDAR], `rmw_zenoh_cpp`, [7500], [19900,47], [2,6534], [0,4422], [0,65\%], [1,25\%],
+    [LiDAR], `rmw_connextdds`, [7500], [14565,93], [1,9421], [0,3237], [0,73\%], [1,45\%],
   ),
   caption: [Reproduzierbarkeits- und Latenzanalyse über 3 Versuchswiederholungen (6 Hops)],
 )
