@@ -160,28 +160,6 @@ print("=" * 110)
 print(reproducibility_df.to_string(index=False))
 print("=" * 110)
 
-# 6. CSV speichern (mit deutschem Komma-Format)
-reproducibility_csv_df = reproducibility_df.copy()
-reproducibility_csv_df["Mittelwert [ms]"] = reproducibility_csv_df[
-    "Mittelwert [ms]"
-].apply(lambda x: format_de(x, 2))
-reproducibility_csv_df["Latenz Kette [ms]"] = reproducibility_csv_df[
-    "Latenz Kette [ms]"
-].apply(lambda x: format_de(x, 4))
-reproducibility_csv_df["Latenz Hop [ms]"] = reproducibility_csv_df[
-    "Latenz Hop [ms]"
-].apply(lambda x: format_de(x, 4))
-reproducibility_csv_df["CV [%]"] = reproducibility_csv_df["CV [%]"].apply(
-    lambda x: format_de(x, 2)
-)
-reproducibility_csv_df["Spanne Rel [%]"] = reproducibility_csv_df[
-    "Spanne Rel [%]"
-].apply(lambda x: format_de(x, 2))
-
-csv_path = os.path.join(output_dir, "reproducibility_report.csv")
-reproducibility_csv_df.to_csv(csv_path, index=False, sep=";")
-print(f"\nErgebnis erfolgreich als CSV gespeichert: {csv_path}")
-
 # --- Typst Export Block ---
 typst_path = os.path.join(output_dir, "reproducibility_report.typ")
 
